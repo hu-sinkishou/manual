@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広大神輝抄 デジタル整理ハンドブック</title>
+    <style>
+        /* デザイン設定（既存のスタイルを継承・拡張） */
+        :root {
+            --primary-color: #2C3E50; /* 知的な紺色 */
+            --accent-color: #E74C3C;  /* 警告の赤 */
+            --success-color: #27AE60; /* 正解の緑 */
+            --highlight-color: #F1C40F; /* 強調の黄色 */
+            --text-color: #333333;
+            --bg-color: #F4F7F9;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px; /* 情報量が多いので少し広めに */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.2rem; letter-spacing: 0.05em; }
+        .subtitle { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; }
+
+        section {
+            background: var(--card-bg);
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 1.3rem;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            background-color: #f9f9f9;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        /* OK/NG比較テーブル */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        .comparison-table th {
+            background-color: #f0f0f0;
+            text-align: left;
+            width: 50%;
+        }
+        .ng-cell { color: var(--accent-color); background-color: #FFF5F5; }
+        .ok-cell { color: var(--success-color); background-color: #F0FFF4; font-weight: bold; }
+        
+        .filename {
+            font-family: "Consolas", "Monaco", monospace;
+            background-color: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #d63384;
+        }
+
+        /* コラム・ポイント */
+        .box-point {
+            background-color: #E8F4FD;
+            border: 2px solid #4A90E2;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .box-alert {
+            background-color: #FFF4E5;
+            border: 2px solid var(--accent-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        /* フォルダ階層の可視化 */
+        .folder-tree {
+            font-family: monospace;
+            background-color: #2d2d2d;
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+
+        footer { text-align: center; padding: 40px 0; color: #888; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>広大神輝抄 デジタル整理ハンドブック</h1>
+        <div class="subtitle">「ファイルがない！」をゼロにする、一生使えるPCスキル</div>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <p><strong>デジタルデータの整理整頓、できていますか？</strong></p>
+            <p>
+                「あの資料、どこいったっけ？」「どれが最新版かわからない…」<br>
+                こんな経験はありませんか？ 会計係のデータは、サークルの「資産」です。<br>
+                ファイル名ひとつで、作業時間は劇的に短縮でき、信頼も守れます。ここでは、PC操作が苦手な人でも絶対に失敗しない「命名規則」と「整理術」を伝授します。
+            </p>
+        </section>
+
+        <section>
+            <h2>第1章：ファイル名の「鉄の掟」</h2>
+            <p>パソコンの中でファイルを迷子にさせないための、絶対的なルールです。</p>
+
+            <h3>1. 「いつ・なにを」で始める</h3>
+            <p>ファイル名の先頭には必ず<strong>「日付」</strong>を入れます。こうすることで、名前順に並べた時に自動的に「時系列」になり、過去のデータを探しやすくなります。</p>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th style="color: var(--accent-color);">✖ ダメな例（探せない）</th>
+                    <th style="color: var(--success-color);">◎ 正解の形</th>
+                </tr>
+                <tr>
+                    <td class="ng-cell">
+                        議事録.docx<br>
+                        <small>いつの議事録？</small>
+                    </td>
+                    <td class="ok-cell">
+                        <span class="filename">20260210_定例会議事録.docx</span><br>
+                        <small>日付_内容.拡張子</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="ng-cell">
+                        IMG_0988.jpg<br>
+                        <small>中身が見るまで不明</small>
+                    </td>
+                    <td class="ok-cell">
+                        <span class="filename">20261025_学祭ガムテープ代.jpg</span><br>
+                        <small>いつ_何を買ったか</small>
+                    </td>
+                </tr>
+            </table>
+
+            <h3>2. 日付は「8桁」で統一する</h3>
+            <p>「2026年2月10日」を表すとき、書き方によってPC内での並び順が変わってしまいます。</p>
+            <div class="box-point">
+                <strong>最強のフォーマット： 西暦4桁 + 月2桁 + 日2桁</strong><br>
+                例：2026年1月5日 → <span class="filename">20260105</span><br>
+                <br>
+                ※月や日が1桁のときは、必ず「0」をつけて2桁にします。<br>
+                これをしないと、「10月」の後に「1月」が並んでしまうなどのトラブルが起きます。
+            </div>
+
+            <h3>3. 「空白」と「記号」は使わない</h3>
+            <p>ファイル名にスペース（空白）や特殊な記号を使うと、メールで送った時にエラーになったり、リンクが切れたりします。</p>
+            <div class="box-alert">
+                <strong>【禁止文字リスト】</strong>
+                <ul>
+                    <li>× スペース（空白） → 代わりにアンダーバー <code>_</code> を使う</li>
+                    <li>× スラッシュ <code>/</code> → 日付の区切りに使わない（PCがフォルダと勘違いします）</li>
+                    <li>× 機種依存文字 <code>①、Ⅱ、㈱、～</code> → 文字化けの原因</li>
+                    <li>× <code>.</code> (ドット) → 拡張子の前以外には使わない</li>
+                </ul>
+                <p><strong>正解例：</strong> <span class="filename">20260210_会計マニュアル_v1.docx</span></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>第2章：バージョン管理（「最新」の罠）</h2>
+            <p>修正を重ねるうちに、「どれが本当の最終版！？」とパニックになるのを防ぎます。</p>
+
+            <h3>「最新」「修正版」という言葉は禁止</h3>
+            <p>「最新」という名前のファイルを作った翌日に修正が入ったら、それはもう「最新」ではありません。</p>
+
+            <table class="comparison-table">
+                <tr>
+                    <th style="color: var(--accent-color);">✖ 危険な管理</th>
+                    <th style="color: var(--success-color);">◎ スマートな管理 (v管理)</th>
+                </tr>
+                <tr>
+                    <td class="ng-cell">
+                        予算案.xlsx<br>
+                        予算案 修正.xlsx<br>
+                        予算案 本当の最新.xlsx<br>
+                        予算案 最終(2).xlsx
+                    </td>
+                    <td class="ok-cell">
+                        <span class="filename">20260210_予算案_v1.xlsx</span><br>
+                        ↓ 修正したら数字を上げる<br>
+                        <span class="filename">20260211_予算案_v2.xlsx</span><br>
+                        <span class="filename">20260212_予算案_v3_提出用.xlsx</span>
+                    </td>
+                </tr>
+            </table>
+            <p>
+                末尾に <code>_v1</code> (バージョン1) をつけ、修正するたびに数字を増やします。<br>
+                こうすれば、常に「数字が一番大きいもの」が最新だと誰でもわかります。
+            </p>
+        </section>
+
+        <section>
+            <h2>第3章：並び順を操るテクニック</h2>
+            <p>ファイルを開く順番が決まっている場合（スライドショーやマニュアルなど）の技です。</p>
+
+            <h3>「頭に数字」で強制整列</h3>
+            <p>PCは基本的にあいうえお順で並びますが、頭に数字をつけることで好きな順番に並べ替えられます。</p>
+            <div class="box-point">
+                <strong>ここでも「0」が重要！</strong><br>
+                ファイルが10個以上になりそうなときは、必ず「01」から始めます。<br>
+                <br>
+                <strong>悪い例：</strong> 1.jpg, 10.jpg, 2.jpg... (1の次に10が来てしまう)<br>
+                <strong>良い例：</strong> <span class="filename">01_集合.jpg</span>, <span class="filename">02_乾杯.jpg</span> ... <span class="filename">10_解散.jpg</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>第4章：フォルダ構成の「あるべき姿」</h2>
+            <p>デスクトップにファイルを散らかしていませんか？ 階層構造（ツリー）を意識しましょう。</p>
+
+            <div class="folder-tree">
+                📂 2026年度_広大神輝抄_会計<br>
+                │<br>
+                ├── 📂 00_マニュアル・規定類 <span style="color:#aaa;">← ルールブックは一番上</span><br>
+                │<br>
+                ├── 📂 01_日常業務<br>
+                │   ├── 📂 領収書データ<br>
+                │   │   ├── 📂 04月<br>
+                │   │   └── 📂 05月<br>
+                │   └── 📂 月次報告書<br>
+                │<br>
+                ├── 📂 02_イベント別<br>
+                │   ├── 📂 202605_新歓<br>
+                │   └── 📂 202611_大学祭<br>
+                │       ├── 20261103_大学祭収支_v2.xlsx<br>
+                │       └── 📂 レシート画像<br>
+                │<br>
+                └── 📂 99_過去データアーカイブ <span style="color:#aaa;">← 終わった年度はここへ</span>
+            </div>
+            <p>
+                <strong>ポイント：</strong><br>
+                フォルダ名にも番号（01, 02...）を振っておくと、並び順が固定されて見やすくなります。<br>
+                デスクトップには「ショートカット」だけを置き、本体はこのフォルダの中にしまいましょう。
+            </p>
+        </section>
+
+        <section>
+            <h2>第5章：知っておくとカッコいい応用知識</h2>
+            <p>ここからは「できたら凄い」レベルですが、トラブル回避に役立ちます。</p>
+
+            <h3>1. 「拡張子」を表示させる</h3>
+            <p>
+                ファイル名の後ろにある <code>.xlsx</code> や <code>.docx</code> などを「拡張子」と呼びます。<br>
+                これを表示させる設定にしておくと、ウイルスファイル（アイコンを偽装している）を見分けられたり、ファイルの種類が一目でわかります。
+            </p>
+            <ul>
+                <li><strong>.xlsx</strong> : エクセル（計算・表）</li>
+                <li><strong>.docx</strong> : ワード（文書）</li>
+                <li><strong>.pdf</strong> : PDF（印刷用・書き換え不可の文書）</li>
+                <li><strong>.csv</strong> : カンマ区切りデータ（会計システムなどで使うデータ）</li>
+                <li><strong>.jpg / .png</strong> : 画像</li>
+                <li><strong>.zip</strong> : 圧縮フォルダ（複数のファイルをまとめたもの）</li>
+            </ul>
+
+            <h3>2. テンプレート（ひな型）の保護</h3>
+            <p>
+                「みんなに入力してもらう空のファイル（ひな型）」を作る時は、ファイル名に <strong>_原本</strong> や <strong>_DO_NOT_EDIT</strong> と入れておきましょう。<br>
+                例：<span class="filename">交通費精算書_原本(上書き禁止).xlsx</span>
+            </p>
+        </section>
+
+        <footer>
+            <p>「整理整頓は、未来の自分への最大の親切」<br>広大神輝抄 会計係</p>
+        </footer>
+
+    </div>
+</body>
+</html>
