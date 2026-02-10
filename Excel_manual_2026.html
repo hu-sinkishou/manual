@@ -43,7 +43,7 @@
         h1 { margin: 0; font-size: 2.0rem; letter-spacing: 0.05em; }
         .subtitle { font-size: 1.0rem; opacity: 0.9; margin-top: 10px; }
 
-        /* 目次（デザイン修正済み） */
+        /* 目次 */
         .toc {
             background: var(--card-bg);
             padding: 20px;
@@ -58,17 +58,17 @@
             margin-top: 0;
         }
         .toc ul {
-            list-style: none; /* 黒点を消す */
+            list-style: none;
             padding: 0;
         }
         .toc li {
             margin-bottom: 10px;
         }
         .toc a {
-            text-decoration: none; /* 下線を消す */
+            text-decoration: none;
             color: var(--primary-color);
             font-weight: bold;
-            display: block; /* クリック領域を広げる */
+            display: block;
             padding: 5px 0;
         }
         .toc a:hover {
@@ -255,6 +255,7 @@
                     <td>レシート紛失のため出金伝票で対応</td>
                 </tr>
             </table>
+
             <h3>3. 「1セル・1情報」の原則</h3>
             <p>
                 1つのセル（マス目）には、1つの情報だけを入れます。<br>
@@ -272,13 +273,14 @@
             <p>
                 ここでも、「合計：50000」と1つのセルに混ぜてはいけません。
             </p>
-            <div style="display: flex; gap: 10px; align-items: center; background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd;">
-                <div>[A列]</div>
-                <div style="border: 1px solid #999; padding: 5px 15px; background-color: #eee;">総合計</div>
-                <div>[B列]</div>
-                <div style="border: 1px solid #999; padding: 5px 15px; background-color: #fff;">50000</div>
-                <div style="color: #666; font-size: 0.9em;">← このようにセルを分けます</div>
-            </div>
+            
+            <table class="excel-table" style="width: auto; margin-top: 10px;">
+                <tr>
+                    <td style="background-color: #eee; font-weight: bold; width: 100px;">総合計</td>
+                    <td style="width: 120px; text-align: right;">50,000</td>
+                </tr>
+            </table>
+            <span class="cell-addr">↑ 左のセルに「ラベル」、右のセルに「計算式（数字）」を入れます。</span>
 
             <h3>5. 「シート」を使い分ける</h3>
             <p>
