@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>広大神輝抄 報告書マニュアル</title>
     <style>
-        /* kaikei_manual_2026.html と共通のデザイン設定 */
+        /* デザイン設定 */
         :root {
             --primary-color: #4A90E2;
             --accent-color: #F5A623;
@@ -139,6 +139,22 @@
             font-size: 1.1rem;
         }
 
+        /* テーブル */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+
         /* リスト */
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
@@ -154,6 +170,7 @@
         @media (max-width: 600px) {
             h1 { font-size: 1.6rem; }
             section { padding: 20px; }
+            table { font-size: 0.8em; }
         }
     </style>
 </head>
@@ -196,7 +213,8 @@
             <ul>
                 <li><a href="#structure">第1章：報告書の構成（4つの柱）</a></li>
                 <li><a href="#analysis">第2章：戦略に使える分析の例</a></li>
-                <li><a href="#save">第3章：作成期限と保存について</a></li>
+                <li><a href="#tech">第3章：分析のためのデータ管理術</a></li>
+                <li><a href="#save">第4章：作成期限と保存について</a></li>
             </ul>
         </div>
 
@@ -262,8 +280,49 @@
             </p>
         </section>
 
+        <section id="tech">
+            <h2>第3章：分析のためのデータ管理術</h2>
+            <p>
+                高度な分析（ヒートマップや時間別分析）をするためには、<strong>「データの形」</strong>が何より重要です。<br>
+                自作レジのログを使う場合も、万が一の手書き集計から入力する場合も、Excel等で集計する際は以下のルールを意識してください。
+            </p>
+
+            <h3>1. 「きれいなデータ」の鉄則</h3>
+            <p>
+                集計しやすいデータとは、<strong>「1行につき1つの取引」</strong>が記録されているデータです。<br>
+                これを守らないと、あとでExcelの便利機能（ピボットテーブル等）が使えません。
+            </p>
+            
+            <div class="box-point">
+                <strong>⭕️ 正しいデータの作り方（縦持ち）</strong>
+                <table>
+                    <tr><th>時間</th><th>商品名</th><th>個数</th><th>単価</th><th>属性</th></tr>
+                    <tr><td>10:05</td><td>ワッフル(魔理沙)</td><td>1</td><td>200</td><td>男1</td></tr>
+                    <tr><td>10:05</td><td>おみくじ</td><td>1</td><td>50</td><td>男1</td></tr>
+                    <tr><td>10:12</td><td>ワッフル(霊夢)</td><td>1</td><td>200</td><td>家族</td></tr>
+                </table>
+                <p style="font-size: 0.8em; margin-top: 5px;">※「誰が何を何個買ったか」をひたすら縦に並べていきます。</p>
+            </div>
+
+            <div class="box-alert">
+                <strong>❌ やってはいけない集計表（横持ち）</strong><br>
+                「10時の売上合計：5000円」のように、<strong>最初から合計した数字だけ</strong>を記録してしまうと、後から「どの商品が売れたか」「セット購入はあったか」の分析ができなくなります。<br>
+                必ず<strong>「取引ごとの生データ」</strong>を残してください。
+            </div>
+
+            <h3>2. 分析に使うツール（キーワード）</h3>
+            <p>
+                自分で分析を行う場合は、以下のExcel機能を勉強・検索してみてください。このスキルは就職活動や社会人になっても役立ちます。
+            </p>
+            <ul>
+                <li><strong>ピボットテーブル：</strong> 大量のデータから「時間別」「商品別」の集計を一瞬で行う機能。必須スキルです。</li>
+                <li><strong>条件付き書式（ヒートマップ）：</strong> 数字の大小を「色」で表現し、売れ筋を可視化する機能。</li>
+                <li><strong>（参考）SQL / Python：</strong> もしプログラミングやデータサイエンスに興味があれば、これらの言語を使うとExcelよりも高速・大量にデータを処理できます。興味のある人は調べてみてください。</li>
+            </ul>
+        </section>
+
         <section id="save">
-            <h2>第3章：作成期限と保存について</h2>
+            <h2>第4章：作成期限と保存について</h2>
             
             <h3>作成期限（鮮度が命！）</h3>
             <p>
@@ -286,7 +345,7 @@
         </section>
 
         <footer>
-            <p>作成日：2026年02月10日<br>広大神輝抄 会計係</p>
+            <p>作成日：2026年02月10日<br>広大神輝抄 会計係ファイアー</p>
         </footer>
 
     </div>
