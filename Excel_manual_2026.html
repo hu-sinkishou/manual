@@ -127,8 +127,8 @@
 <body>
 
     <header>
-        <h1>Excelマニュアル</h1>
-        <div class="subtitle">広大神輝抄 会計チーム専用</div>
+        <h1>Excel操作マニュアル</h1>
+        <div class="subtitle">基礎から始める、間違いのないデータ管理術</div>
     </header>
 
     <div class="container">
@@ -142,150 +142,188 @@
         </section>
 
         <section>
-            <p><strong>目次</strong></p>
+            <h2>目次</h2>
             <ul>
-                <li><a href="#teams">第1章：Teamsでの基本（保存と共有）</a></li>
-                <li><a href="#structure">第2章：表を作る時の「黄金の型」</a></li>
-                <li><a href="#input">第3章：入力のルール（NG集）</a></li>
-                <li><a href="#calc">第4章：計算する（合計・残高）</a></li>
-                <li><a href="#analyze">第5章：分析する（フィルタ）</a></li>
+                <li><a href="#teams">第1章：データの場所（PCとTeamsの関係）</a></li>
+                <li><a href="#sheet-design">第2章：表とシートの作り方</a></li>
+                <li><a href="#input-rule">第3章：入力の鉄則</a></li>
+                <li><a href="#calculation">第4章：計算の基本（四則演算と参照）</a></li>
             </ul>
         </section>
 
         <section id="teams">
-            <h2>第1章：Teamsでの基本（保存と共有）</h2>
-            <p>私たちの会計データは、個人のPCではなく「Teams」の中にあります。</p>
+            <h2>第1章：データの場所（PCとTeamsの関係）</h2>
+            <p>
+                作業は自分の使い慣れたパソコンで行い、完成した大切なデータはTeamsに預ける。これが基本の流れです。
+            </p>
             
-            <h3>1. 保存ボタンはありません</h3>
-            <p>
-                Teams上のExcelは<strong>「自動保存」</strong>です。<br>
-                あなたが数字を1つ入力するたびに、クラウド上に自動で保存されています。停電してもPCがフリーズしてもデータは消えません。安心してください。
-            </p>
+            <h3>1. 作業場所と保管場所</h3>
+            <ul>
+                <li><strong>自分のPC（作業机）：</strong> <br>ファイルを作成したり、修正したりするのは、個人のパソコン上で行います。動作も早く、集中して作業できます。</li>
+                <li><strong>Teams（金庫）：</strong> <br>作業が終わったファイル、あるいはみんなに共有したいファイルはTeamsにアップロードします。ここは「保存・共有専用」です。</li>
+            </ul>
 
-            <h3>2. 共同編集の注意点</h3>
-            <p>
-                複数の人が同時に同じファイルを開いて作業できます。<br>
-                ただし、<strong>「同じセル（マス目）」を同時に編集するとエラーになります。</strong><br>
-                画面上に他の人のアイコンが出ている時は、その人が作業している場所を避けて入力しましょう。
-            </p>
-
-            <div class="box-point">
-                <strong>間違えて消しちゃった！という時は…</strong><br>
-                慌てずに <kbd>Ctrl</kbd> + <kbd>Z</kbd> キーを押してください。<br>
-                これは「ひとつ前の状態に戻る」魔法のコマンドです。（Macの人は <kbd>command</kbd> + <kbd>Z</kbd>）
+            <div class="box-alert">
+                <strong>注意：</strong><br>
+                PCで作業している間は、データはまだあなたの手元にしかありません。<br>
+                こまめに「上書き保存 (<kbd>Ctrl</kbd> + <kbd>S</kbd>)」をする癖をつけましょう。
             </div>
         </section>
 
-        <section id="structure">
-            <h2>第2章：表を作る時の「黄金の型」</h2>
+        <section id="sheet-design">
+            <h2>第2章：表とシートの作り方</h2>
             <p>
-                「レシート集計」でも「イベント売上」でも、白紙から表を作る時は、まずこの<strong>6つの項目（列）</strong>を作ってください。<br>
-                これさえあれば、どんな分析も精算も可能です。
+                Excelは真っ白なキャンバスです。いきなり数字を入れるのではなく、まずは「入れ物」を作りましょう。
             </p>
 
-            <table class="excel-table">
+            <h3>1. 「シート」を使い分ける（情報の整理）</h3>
+            <p>
+                画面の左下にあるタブを<strong>「シート」</strong>と呼びます。<br>
+                1つのファイルの中に、ルーズリーフのように何ページでも追加できます。
+            </p>
+            <ul>
+                <li><strong>日付ごと：</strong> 「4月」「5月」「6月」…と月ごとにシートを分ける。</li>
+                <li><strong>項目ごと：</strong> 「レシート集計」「部費管理」「合宿費」…と目的別に分ける。</li>
+            </ul>
+            <p>
+                全部を1枚にまとめようとせず、シートを増やして整理すると、後で見返す時にとても楽になります。
+            </p>
+
+            <h3>2. ヘッダーを作る（表の看板）</h3>
+            <p>
+                表の一番上の行（1行目）には、必ず「そこに何が入るか」のタイトル（ヘッダー）を書きましょう。<br>
+                これがないと、後で見た時に何の数字かわからなくなります。
+            </p>
+            <div class="box-point">
+                <strong>見やすくするコツ：</strong><br>
+                ヘッダーの行を選択して、文字を<strong>「太字」</strong>にしたり、セルの色を薄いグレーにしたりすると、データ部分との区別がついてグッと見やすくなります。
+            </div>
+
+            <h3>3. 数字の「迷子」を防ぐ（ラベルの徹底）</h3>
+            <p>
+                表の外などで計算する際、数字だけをポツンと置いてはいけません。<br>
+                <strong>「その数字が何なのか」を示す言葉（ラベル）とセットにする</strong>のが、見やすいExcelの一貫したルールです。
+            </p>
+            
+            <table class="excel-table" style="width: auto; margin-left: 20px;">
                 <tr>
-                    <th width="12%">A列<br>日付</th>
-                    <th width="15%">B列<br>科目</th>
-                    <th width="25%">C列<br>摘要（内容）</th>
-                    <th width="15%">D列<br>入金</th>
-                    <th width="15%">E列<br>出金</th>
-                    <th>F列<br>備考</th>
+                    <td style="background-color: #ffebee; color: #c62828;"><strong>❌ NG（数字だけ）</strong></td>
+                    <td style="background-color: #e8f5e9; color: #2e7d32;"><strong>⭕ OK（ラベルあり）</strong></td>
                 </tr>
                 <tr>
-                    <td>2/10</td>
-                    <td>消耗品費</td>
-                    <td>イベント用模造紙</td>
-                    <td></td>
-                    <td>3,200</td>
-                    <td>山田立替</td>
-                </tr>
-                <tr>
-                    <td>2/11</td>
-                    <td>部費</td>
-                    <td>2月分部費徴収</td>
-                    <td>10,000</td>
-                    <td></td>
-                    <td>10名分</td>
+                    <td>
+                        <div style="border: 1px solid #ccc; padding: 5px; width: 100px; text-align: right;">5,000</div>
+                        <span class="cell-addr">（これ何のお金？）</span>
+                    </td>
+                    <td>
+                        <div style="display: flex;">
+                            <div style="border: 1px solid #ccc; padding: 5px; width: 80px; background-color: #f9f9f9;"><strong>合　計</strong></div>
+                            <div style="border: 1px solid #ccc; padding: 5px; width: 100px; text-align: right;">5,000</div>
+                        </div>
+                        <span class="cell-addr">（一目で分かる！）</span>
+                    </td>
                 </tr>
             </table>
+            
+            <p>
+                このように、値を入力するセルの<strong>左側（または上）</strong>には、必ず「合計」「残金」「立替分」といった見出しを付けてください。<br>
+                誰が見ても（未来の自分が見ても）意味が分かるようにしましょう。
+            </p>
 
-            <ul>
-                <li><strong>日付：</strong> いつ動いたお金か。</li>
-                <li><strong>科目：</strong> 消耗品費、食費、交通費、部費など（カテゴリ）。</li>
-                <li><strong>摘要：</strong> 具体的に何を買ったか、誰からもらったか。</li>
-                <li><strong>入金/出金：</strong> お金が入ったらD列、出たらE列。</li>
-                <li><strong>備考：</strong> レシートNoや立替者の名前など。</li>
-            </ul>
+            <h3>4. 格子（枠線）をつける</h3>
+            <p>
+                数字やラベルを入れたら、その範囲を選択して「田」のようなマーク（格子）をクリックして線を引きます。<br>
+                印刷した時や、画面で見る時の見やすさが段違いです。
+            </p>
         </section>
 
-        <section id="input">
-            <h2>第3章：入力のルール（NG集）</h2>
-            <p>後の計算を楽にするために、絶対に守ってほしいルールが2つあります。</p>
+        <section id="input-rule">
+            <h2>第3章：入力の鉄則</h2>
+            <p>
+                Excelは「見せる資料」であると同時に「計算機」でもあります。<br>
+                正しく計算させるために、1つだけ絶対に守るルールがあります。
+            </p>
 
-            <h3>NG①：「円」と入力しない！</h3>
+            <h3>これだけはNG：「円」と入力しない！</h3>
             <div class="box-alert">
                 ❌ 悪い例：<strong>1000円</strong><br>
                 ⭕ 良い例：<strong>1000</strong>
             </div>
             <p>
-                「円」という文字が入ると、Excelはそれを「数字」ではなく「文字」として扱ってしまい、計算できません。<br>
-                見た目を「¥1,000」にしたい時は、数字だけ打ってから、上のメニューにある<strong>「¥」ボタン（通貨表示）</strong>を押してください。
+                「円」という文字が入ると、Excelはそれを「数字」ではなく「文字」として扱ってしまい、計算ができなくなります。<br>
+                「¥」マークや「円」を表示させたい場合は、数字を入力した後、メニューにある<strong>表示形式の設定（¥マークなど）</strong>で見た目だけを変えてください。
             </p>
 
-            <h3>NG②：セルの結合をしない！</h3>
+            <h3>セルの結合について</h3>
             <p>
-                「見出しをきれいにしたいから」とセルを結合（複数のマスを1つにつなげること）してしまうと、後で並べ替えができなくなります。<br>
-                <strong>1行につき1つのデータ</strong>を入力するのが鉄則です。
+                見出しを整えるためや、レイアウトを見やすくするために「セルの結合」を使うのはOKです。<br>
+                見る人が分かりやすい資料作りを心がけましょう。
             </p>
         </section>
 
-        <section id="calc">
-            <h2>第4章：計算する（合計・残高）</h2>
-            <p>電卓は使いません。Excelに計算させましょう。</p>
+        <section id="calculation">
+            <h2>第4章：計算の基本（四則演算と参照）</h2>
+            <p>
+                電卓を叩いて、その結果をExcelに入力するのはやめましょう。<br>
+                Excel上で計算式を作れば、元になる数字が変わった時に、答えも自動で修正してくれます。
+            </p>
 
-            <h3>合計を出す（SUM関数）</h3>
-            <p>レシートの合計などを出したい時です。</p>
-            <ol>
-                <li>合計を出したいセル（数字の列の一番下など）をクリック。</li>
-                <li>画面右上の<strong>「オートSUM（Σ）」</strong>ボタンをクリック。</li>
-                <li>点線で範囲が囲まれるので、正しければ <kbd>Enter</kbd> キーを押す。</li>
-            </ol>
-            <p>これだけで、一瞬で合計が出ます。数字を修正しても自動で再計算されます。</p>
+            <h3>1. 四則演算（足す・引く・掛ける・割る）</h3>
+            <p>
+                計算式を入れる時は、必ず半角の <strong>=</strong> （イコール）から始めます。<br>
+                算数とは使う記号が少し違うので注意してください。
+            </p>
+            <table class="excel-table">
+                <tr>
+                    <th width="20%">計算</th>
+                    <th width="20%">記号</th>
+                    <th>入力例</th>
+                </tr>
+                <tr>
+                    <td>足し算</td>
+                    <td align="center"><strong>+</strong></td>
+                    <td><code>=100+50</code></td>
+                </tr>
+                <tr>
+                    <td>引き算</td>
+                    <td align="center"><strong>-</strong></td>
+                    <td><code>=100-30</code></td>
+                </tr>
+                <tr>
+                    <td>掛け算</td>
+                    <td align="center"><strong>*</strong> (アスタリスク)</td>
+                    <td><code>=100*1.1</code> (消費税など)</td>
+                </tr>
+                <tr>
+                    <td>割り算</td>
+                    <td align="center"><strong>/</strong> (スラッシュ)</td>
+                    <td><code>=1000/4</code> (割り勘など)</td>
+                </tr>
+            </table>
 
-            <h3>残高を確かめる（引き算）</h3>
-            <p>「金庫にあるべきお金」と「実際のお金」が合っているか確認します。</p>
+            <h3>2. 「セル参照」の魔法</h3>
+            <p>
+                直接「=100+200」と入力するのではなく、<strong>「A1のセルの数字 と B1のセルの数字 を足す」</strong>という指定の仕方をします。<br>
+                これを「セル参照」と呼びます。
+            </p>
             <div class="box-point">
-                <strong>数式：</strong> <code>= [入金の合計] - [出金の合計]</code>
+                <strong>やり方：</strong><br>
+                1. <code>=</code> を入力する<br>
+                2. 足したいセル（例：A1）をマウスでクリック<br>
+                3. <code>+</code> を入力する<br>
+                4. もうひとつのセル（例：B1）をクリック<br>
+                5. <kbd>Enter</kbd> を押す → <strong>完了！</strong>
             </div>
+
+            <h3>3. まとめて計算（範囲指定・SUM関数）</h3>
             <p>
-                セルに半角で <strong>=</strong> を入力し、入金合計のセルをクリック、<strong>-</strong>（マイナス）を入力、出金合計のセルをクリック、最後に <kbd>Enter</kbd> です。
+                レシートが10枚ある時に、全部を「+」でつなぐのは大変です。<br>
+                そういう時は、範囲を指定して合計を出します。ここでも<strong>「ラベル」</strong>を忘れずに。
             </p>
-        </section>
-
-        <section id="analyze">
-            <h2>第5章：分析する（フィルタ）</h2>
-            <p>
-                「お菓子代にいくら使った？」「日付順じゃなくて金額順に並べたい」<br>
-                そんな時は<strong>「フィルター機能」</strong>を使います。これがExcelの真骨頂です。
-            </p>
-
-            <h3>設定方法</h3>
-            <ol>
-                <li>表の項目行（日付、科目…と書かれた行）を選択します。</li>
-                <li>メニューの「データ」タブから<strong>「フィルター（漏斗のマーク）」</strong>をクリック。</li>
-                <li>各項目に「▼」マークがつきます。</li>
-            </ol>
-
-            <h3>活用例</h3>
             <ul>
-                <li><strong>科目の▼を押す：</strong> 「食費」だけにチェックを入れると、食費のデータだけが表示されます。</li>
-                <li><strong>日付の▼を押す：</strong> 「〇月」のデータだけ抽出できます。</li>
+                <li><strong>SUM関数：</strong> <code>=SUM( )</code> と入力し、カッコの中に合計したい範囲をマウスでドラッグして選びます。（例：<code>=SUM(D2:D15)</code>）</li>
+                <li><strong>範囲の意味：</strong> 「D2:D15」は、「D2からD15までの全部」という意味です。</li>
             </ul>
-            <p>
-                この機能を使えば、来年の予算を組む時に「去年はいくらかかったっけ？」が一瞬で分かります。<br>
-                これが<strong>「未来へのバトン」</strong>になるデータ活用です。
-            </p>
         </section>
 
         <footer>
