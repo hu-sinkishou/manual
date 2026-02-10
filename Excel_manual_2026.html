@@ -141,7 +141,7 @@
             </p>
         </section>
 
-        <section>
+        <div class="toc">
             <h2>目次</h2>
             <ul>
                 <li><a href="#teams">第1章：データの場所（PCとTeamsの関係）</a></li>
@@ -149,7 +149,7 @@
                 <li><a href="#input-rule">第3章：入力の鉄則</a></li>
                 <li><a href="#calculation">第4章：計算の基本（四則演算と参照）</a></li>
             </ul>
-        </section>
+        </div>
 
         <section id="teams">
             <h2>第1章：データの場所（PCとTeamsの関係）</h2>
@@ -173,67 +173,72 @@
         <section id="sheet-design">
             <h2>第2章：表とシートの作り方</h2>
             <p>
-                Excelは真っ白なキャンバスです。いきなり数字を入れるのではなく、まずは「入れ物」を作りましょう。
+                Excelは「巨大な方眼紙」ですが、私たちはこれを「データベース」として使います。<br>
+                将来、別のソフトで読み込んだり、AIに分析させたりするために、最も重要なのが<strong>「列（縦の並び）のルール」</strong>です。
             </p>
 
-            <h3>1. 「シート」を使い分ける（情報の整理）</h3>
+            <h3>1. 「ヘッダー」が全てのルールを決める</h3>
             <p>
-                画面の左下にあるタブを<strong>「シート」</strong>と呼びます。<br>
-                1つのファイルの中に、ルーズリーフのように何ページでも追加できます。
-            </p>
-            <ul>
-                <li><strong>日付ごと：</strong> 「4月」「5月」「6月」…と月ごとにシートを分ける。</li>
-                <li><strong>項目ごと：</strong> 「レシート集計」「部費管理」「合宿費」…と目的別に分ける。</li>
-            </ul>
-            <p>
-                全部を1枚にまとめようとせず、シートを増やして整理すると、後で見返す時にとても楽になります。
-            </p>
-
-            <h3>2. ヘッダーを作る（表の看板）</h3>
-            <p>
-                表の一番上の行（1行目）には、必ず「そこに何が入るか」のタイトル（ヘッダー）を書きましょう。<br>
-                これがないと、後で見た時に何の数字かわからなくなります。
+                表の一番上の行（1行目）を<strong>「ヘッダー（見出し）」</strong>と呼びます。<br>
+                データ入力において、毎回「金額：1000」「金額：5000」のように説明を書く必要はありません。むしろ書いてはいけません。
             </p>
             <div class="box-point">
-                <strong>見やすくするコツ：</strong><br>
-                ヘッダーの行を選択して、文字を<strong>「太字」</strong>にしたり、セルの色を薄いグレーにしたりすると、データ部分との区別がついてグッと見やすくなります。
+                <strong>鉄則：</strong><br>
+                「その数字が何なのか」は、<strong>一番上のヘッダーだけで語らせます。</strong><br>
+                その列にある数字はすべて、ヘッダーのルールに従います。
             </div>
 
-            <h3>3. 数字の「迷子」を防ぐ（ラベルの徹底）</h3>
-            <p>
-                表の外などで計算する際、数字だけをポツンと置いてはいけません。<br>
-                <strong>「その数字が何なのか」を示す言葉（ラベル）とセットにする</strong>のが、見やすいExcelの一貫したルールです。
-            </p>
-            
-            <table class="excel-table" style="width: auto; margin-left: 20px;">
+            <table class="excel-table" style="width: 100%;">
                 <tr>
-                    <td style="background-color: #ffebee; color: #c62828;"><strong>❌ NG（数字だけ）</strong></td>
-                    <td style="background-color: #e8f5e9; color: #2e7d32;"><strong>⭕ OK（ラベルあり）</strong></td>
+                    <th style="background-color: #ffebee; color: #c62828;">❌ 悪い例（毎回ラベルを書く）</th>
+                    <th style="background-color: #e8f5e9; color: #2e7d32;">⭕ 良い例（ヘッダーに任せる）</th>
                 </tr>
                 <tr>
-                    <td>
-                        <div style="border: 1px solid #ccc; padding: 5px; width: 100px; text-align: right;">5,000</div>
-                        <span class="cell-addr">（これ何のお金？）</span>
+                    <td style="vertical-align: top;">
+                        <div style="border: 1px solid #ccc; padding: 5px; margin-bottom: 2px;">金額: 1,000</div>
+                        <div style="border: 1px solid #ccc; padding: 5px; margin-bottom: 2px;">金額: 5,000</div>
+                        <div style="border: 1px solid #ccc; padding: 5px;">金額: 3,000</div>
+                        <span class="cell-addr">↑「金額」という言葉が何度も出てきて邪魔です。<br>計算もできません。</span>
                     </td>
-                    <td>
-                        <div style="display: flex;">
-                            <div style="border: 1px solid #ccc; padding: 5px; width: 80px; background-color: #f9f9f9;"><strong>合　計</strong></div>
-                            <div style="border: 1px solid #ccc; padding: 5px; width: 100px; text-align: right;">5,000</div>
-                        </div>
-                        <span class="cell-addr">（一目で分かる！）</span>
+                    <td style="vertical-align: top;">
+                        <div style="background-color: #ddd; font-weight: bold; border: 1px solid #ccc; padding: 5px; text-align: center;">金額(円)</div>
+                        <div style="border: 1px solid #ccc; padding: 5px; text-align: right;">1,000</div>
+                        <div style="border: 1px solid #ccc; padding: 5px; text-align: right;">5,000</div>
+                        <div style="border: 1px solid #ccc; padding: 5px; text-align: right;">3,000</div>
+                        <span class="cell-addr">↑「金額」と書くのは最初だけ。<br>中身は純粋な数字だけにします。</span>
                     </td>
                 </tr>
             </table>
-            
-            <p>
-                このように、値を入力するセルの<strong>左側（または上）</strong>には、必ず「合計」「残金」「立替分」といった見出しを付けてください。<br>
-                誰が見ても（未来の自分が見ても）意味が分かるようにしましょう。
-            </p>
 
-            <h3>4. 格子（枠線）をつける</h3>
+            <h3>2. 「1セル・1情報」の原則</h3>
             <p>
-                数字やラベルを入れたら、その範囲を選択して「田」のようなマーク（格子）をクリックして線を引きます。<br>
-                印刷した時や、画面で見る時の見やすさが段違いです。
+                1つのセル（マス目）には、1つの情報だけを入れます。<br>
+                「単価と個数」を同じセルに入れたり、「日付と曜日」を混ぜたりすると、後で集計ができなくなります。
+            </p>
+            <ul>
+                <li><strong>NG：</strong> 「10/24 (月)」 と1つのセルに入力</li>
+                <li><strong>OK：</strong> 「10/24」の列と、「月曜日」の列を分ける（または曜日は入力しない）</li>
+            </ul>
+
+            <h3>3. 表の外で計算する時だけ「ラベル」を使う</h3>
+            <p>
+                表としてのデータ入力（リスト作成）とは別に、最終的な<strong>「合計」</strong>や<strong>「残高」</strong>などを表の外側に表示させたい場合のみ、隣のセルに名前（ラベル）を付けます。
+            </p>
+            <p>
+                ここでも、「合計：50000」と1つのセルに混ぜてはいけません。
+            </p>
+            <div style="display: flex; gap: 10px; align-items: center; background-color: #f9f9f9; padding: 10px; border: 1px solid #ddd;">
+                <div>[A列]</div>
+                <div style="border: 1px solid #999; padding: 5px 15px; background-color: #eee;">総合計</div>
+                <div>[B列]</div>
+                <div style="border: 1px solid #999; padding: 5px 15px; background-color: #fff;">50000</div>
+                <div style="color: #666; font-size: 0.9em;">← このようにセルを分けます</div>
+            </div>
+
+            <h3>4. 「シート」を使い分ける</h3>
+            <p>
+                1つのシートにあれこれ詰め込まず、目的ごとにシート（タブ）を分けましょう。<br>
+                「4月」「5月」のように時系列で分けるのが基本ですが、月が変わってもヘッダーの並び順（フォーマット）は変えないようにしましょう。
             </p>
         </section>
 
@@ -241,23 +246,33 @@
             <h2>第3章：入力の鉄則</h2>
             <p>
                 Excelは「見せる資料」であると同時に「計算機」でもあります。<br>
-                正しく計算させるために、1つだけ絶対に守るルールがあります。
+                正しく計算させるために、守るべきルールがあります。
             </p>
 
-            <h3>これだけはNG：「円」と入力しない！</h3>
+            <h3>NG①：「円」や「単位」を入力しない</h3>
             <div class="box-alert">
-                ❌ 悪い例：<strong>1000円</strong><br>
-                ⭕ 良い例：<strong>1000</strong>
+                ❌ 悪い例：<strong>1000円</strong> 、 <strong>10個</strong><br>
+                ⭕ 良い例：<strong>1000</strong> 、 <strong>10</strong>
             </div>
             <p>
-                「円」という文字が入ると、Excelはそれを「数字」ではなく「文字」として扱ってしまい、計算ができなくなります。<br>
-                「¥」マークや「円」を表示させたい場合は、数字を入力した後、メニューにある<strong>表示形式の設定（¥マークなど）</strong>で見た目だけを変えてください。
+                第2章の原則通りです。「円」という文字が入った瞬間、Excelはそれを「計算できない文字」として扱います。<br>
+                <strong>「単位」はヘッダー（行の一番上）に書いておけば十分です。</strong><br>
+                （例：ヘッダーを「金額(円)」や「個数(個)」にする）
+            </p>
+            <p>
+                どうしても「¥」マークなどを表示させたい場合は、数字を入力した後、メニューにある<strong>表示形式の設定（通貨表示など）</strong>を使って、見た目だけを変えてください。データの中身は数字のままにしておくことが重要です。
+            </p>
+
+            <h3>NG②：スペースで見た目を整えない</h3>
+            <p>
+                セルの中で「佐 藤　太 郎」のようにスペースを入れて文字の間隔を調整するのはやめましょう。<br>
+                検索する時にヒットしなくなったり、並べ替えでおかしくなったりします。名前は詰めて入力します。
             </p>
 
             <h3>セルの結合について</h3>
             <p>
-                見出しを整えるためや、レイアウトを見やすくするために「セルの結合」を使うのはOKです。<br>
-                見る人が分かりやすい資料作りを心がけましょう。
+                見出しを整えるために「セルの結合」を使うのはOKですが、<strong>データが入っている部分（金額や日付など）は結合しない</strong>のが無難です。<br>
+                行の並べ替えやコピー＆ペーストができなくなる原因になります。
             </p>
         </section>
 
