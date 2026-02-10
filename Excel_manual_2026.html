@@ -370,20 +370,95 @@
                 <strong>やり方：</strong><br>
                 1. <code>=</code> を入力する<br>
                 2. 足したいセル（例：A1）をマウスでクリック<br>
+                <span style="font-size: 0.9em; color: #555;">（※慣れてきたら、キーボードで直接 <strong>A1</strong> と入力してもOKです！）</span><br>
                 3. <code>+</code> を入力する<br>
                 4. もうひとつのセル（例：B1）をクリック<br>
                 5. <kbd>Enter</kbd> を押す → <strong>完了！</strong>
             </div>
 
-            <h3>3. まとめて計算（範囲指定・SUM関数）</h3>
+            <h3>3. 便利な「関数」5選</h3>
             <p>
-                レシートが10枚ある時に、全部を「+」でつなぐのは大変です。<br>
-                そういう時は、範囲を指定して合計を出します。ここでも<strong>「ラベル」</strong>を忘れずに。
+                「合計」や「平均」など、よく使う計算はExcelが<strong>「関数（かんすう）」</strong>という名前で用意してくれています。<br>
+                使い方は全部同じです。<code>=関数名(範囲)</code> と書くだけです。
             </p>
-            <ul>
-                <li><strong>SUM関数：</strong> <code>=SUM( )</code> と入力し、カッコの中に合計したい範囲をマウスでドラッグして選びます。（例：<code>=SUM(D2:D15)</code>）</li>
-                <li><strong>範囲の意味：</strong> 「D2:D15」は、「D2からD15までの全部」という意味です。</li>
-            </ul>
+            
+            <table class="excel-table">
+                <tr>
+                    <th width="15%">関数名</th>
+                    <th width="35%">入力例と意味</th>
+                    <th>説明・使いどころ</th>
+                </tr>
+                <tr>
+                    <td align="center" style="color: var(--primary-color); font-weight: bold;">SUM</td>
+                    <td>
+                        <code>=SUM(C2:C10)</code><br>
+                        <span style="color: #666; font-size: 0.9em;">→ C2からC10までの<strong>合計</strong>を出す</span>
+                    </td>
+                    <td>
+                        一番よく使います。レシートの合計などに。
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="color: var(--primary-color); font-weight: bold;">AVERAGE</td>
+                    <td>
+                        <code>=AVERAGE(C2:C10)</code><br>
+                        <span style="color: #666; font-size: 0.9em;">→ C2からC10までの<strong>平均</strong>を出す</span>
+                    </td>
+                    <td>
+                        「1人あたりいくらか？」の計算に便利です。
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="color: var(--primary-color); font-weight: bold;">COUNT</td>
+                    <td>
+                        <code>=COUNT(B2:B30)</code><br>
+                        <span style="color: #666; font-size: 0.9em;">→ B2からB30にある<strong>数字の個数</strong>を数える</span>
+                    </td>
+                    <td>
+                        「会費を払った人数（金額が入っているセル）」だけを数えたい時に使います。<br>
+                        <strong>※文字や空白は無視されます。</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="color: var(--primary-color); font-weight: bold;">COUNTA</td>
+                    <td>
+                        <code>=COUNTA(A2:A30)</code><br>
+                        <span style="color: #666; font-size: 0.9em;">→ A2からA30にある<strong>空白以外の個数</strong>を数える</span>
+                    </td>
+                    <td>
+                        「名前が書いてある人数」など、文字も含めて数えたい時に使います。<br>
+                        （COUNTA = Count All の略です）
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" style="color: var(--primary-color); font-weight: bold;">MAX / MIN</td>
+                    <td>
+                        <code>=MAX(C2:C10)</code><br>
+                        <span style="color: #666; font-size: 0.9em;">→ C2からC10の中で<strong>最大値</strong>を出す</span>
+                    </td>
+                    <td>
+                        一番高い買い物や、一番安い金額を一瞬で見つけます。
+                    </td>
+                </tr>
+            </table>
+
+            <h3>4. 関数の合わせ技（応用）</h3>
+            <p>
+                関数は単体で使うだけでなく、四則演算と組み合わせることもできます。<br>
+                これができると計算の幅が一気に広がります。
+            </p>
+            
+            <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid var(--primary-color); margin-top: 15px;">
+                <strong>例1：合計に消費税をかける</strong><br>
+                <code>=SUM(C2:C10) * 1.1</code><br>
+                <span style="color: #666; font-size: 0.9em;">意味：「C2からC10を全部足して、その結果を1.1倍する」</span>
+            </div>
+
+            <div style="background-color: #f8f9fa; padding: 15px; border-left: 4px solid var(--primary-color); margin-top: 15px;">
+                <strong>例2：予算から合計を引く（残金計算）</strong><br>
+                <code>=A1 - SUM(C2:C10)</code><br>
+                <span style="color: #666; font-size: 0.9em;">意味：「A1（予算）から、使ったお金（C2～C10）の合計を引く」</span>
+            </div>
         </section>
 
         <footer>
