@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広大神輝抄 Excelマニュアル</title>
+    <style>
+        /* 共通デザイン設定（前回を踏襲） */
+        :root {
+            --primary-color: #217346; /* Excelカラーの緑に変更 */
+            --accent-color: #D32F2F;  /* 注意喚起の赤 */
+            --text-color: #333333;
+            --bg-color: #F4F7F9;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ヘッダー */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #1D6F42 0%, #154c2d 100%);
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 { margin: 0; font-size: 2.0rem; letter-spacing: 0.05em; }
+        .subtitle { font-size: 1.0rem; opacity: 0.9; margin-top: 10px; }
+
+        /* セクション */
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            background-color: #f0f7f2;
+            padding: 8px 12px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 0 5px 5px 0;
+        }
+
+        /* 強調ボックス */
+        .box-point {
+            background-color: #E8F5E9;
+            border: 1px solid #C8E6C9;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .box-alert {
+            background-color: #FFEBEE;
+            border: 1px solid #FFCDD2;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            color: #b71c1c;
+        }
+
+        /* Excel風テーブル */
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        .excel-table th {
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .excel-table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        .cell-addr { color: #888; font-size: 0.8em; display: block; margin-bottom: 2px; }
+
+        /* キーボード操作 */
+        kbd {
+            background-color: #eee;
+            border-radius: 3px;
+            border: 1px solid #b4b4b4;
+            box-shadow: 0 1px 1px rgba(0,0,0,.2), 0 2px 0 0 rgba(255,255,255,.7) inset;
+            color: #333;
+            display: inline-block;
+            font-size: 0.85em;
+            font-weight: 700;
+            line-height: 1;
+            padding: 2px 4px;
+            white-space: nowrap;
+        }
+
+        /* フッター */
+        footer { text-align: center; padding: 40px 0; color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Excelマニュアル</h1>
+        <div class="subtitle">広大神輝抄 会計チーム専用</div>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <p>
+                <strong>「Excel（エクセル）は、あなたの最強のパートナーです」</strong><br>
+                このマニュアルでは、サークルの会計業務に必要なExcel操作に絞って解説します。<br>
+                難しい関数を覚える必要はありません。基本の型とルールさえ守れば、計算ミスゼロの運営が可能です。
+            </p>
+        </section>
+
+        <section>
+            <p><strong>目次</strong></p>
+            <ul>
+                <li><a href="#teams">第1章：Teamsでの基本（保存と共有）</a></li>
+                <li><a href="#structure">第2章：表を作る時の「黄金の型」</a></li>
+                <li><a href="#input">第3章：入力のルール（NG集）</a></li>
+                <li><a href="#calc">第4章：計算する（合計・残高）</a></li>
+                <li><a href="#analyze">第5章：分析する（フィルタ）</a></li>
+            </ul>
+        </section>
+
+        <section id="teams">
+            <h2>第1章：Teamsでの基本（保存と共有）</h2>
+            <p>私たちの会計データは、個人のPCではなく「Teams」の中にあります。</p>
+            
+            <h3>1. 保存ボタンはありません</h3>
+            <p>
+                Teams上のExcelは<strong>「自動保存」</strong>です。<br>
+                あなたが数字を1つ入力するたびに、クラウド上に自動で保存されています。停電してもPCがフリーズしてもデータは消えません。安心してください。
+            </p>
+
+            <h3>2. 共同編集の注意点</h3>
+            <p>
+                複数の人が同時に同じファイルを開いて作業できます。<br>
+                ただし、<strong>「同じセル（マス目）」を同時に編集するとエラーになります。</strong><br>
+                画面上に他の人のアイコンが出ている時は、その人が作業している場所を避けて入力しましょう。
+            </p>
+
+            <div class="box-point">
+                <strong>間違えて消しちゃった！という時は…</strong><br>
+                慌てずに <kbd>Ctrl</kbd> + <kbd>Z</kbd> キーを押してください。<br>
+                これは「ひとつ前の状態に戻る」魔法のコマンドです。（Macの人は <kbd>command</kbd> + <kbd>Z</kbd>）
+            </div>
+        </section>
+
+        <section id="structure">
+            <h2>第2章：表を作る時の「黄金の型」</h2>
+            <p>
+                「レシート集計」でも「イベント売上」でも、白紙から表を作る時は、まずこの<strong>6つの項目（列）</strong>を作ってください。<br>
+                これさえあれば、どんな分析も精算も可能です。
+            </p>
+
+            <table class="excel-table">
+                <tr>
+                    <th width="12%">A列<br>日付</th>
+                    <th width="15%">B列<br>科目</th>
+                    <th width="25%">C列<br>摘要（内容）</th>
+                    <th width="15%">D列<br>入金</th>
+                    <th width="15%">E列<br>出金</th>
+                    <th>F列<br>備考</th>
+                </tr>
+                <tr>
+                    <td>2/10</td>
+                    <td>消耗品費</td>
+                    <td>イベント用模造紙</td>
+                    <td></td>
+                    <td>3,200</td>
+                    <td>山田立替</td>
+                </tr>
+                <tr>
+                    <td>2/11</td>
+                    <td>部費</td>
+                    <td>2月分部費徴収</td>
+                    <td>10,000</td>
+                    <td></td>
+                    <td>10名分</td>
+                </tr>
+            </table>
+
+            <ul>
+                <li><strong>日付：</strong> いつ動いたお金か。</li>
+                <li><strong>科目：</strong> 消耗品費、食費、交通費、部費など（カテゴリ）。</li>
+                <li><strong>摘要：</strong> 具体的に何を買ったか、誰からもらったか。</li>
+                <li><strong>入金/出金：</strong> お金が入ったらD列、出たらE列。</li>
+                <li><strong>備考：</strong> レシートNoや立替者の名前など。</li>
+            </ul>
+        </section>
+
+        <section id="input">
+            <h2>第3章：入力のルール（NG集）</h2>
+            <p>後の計算を楽にするために、絶対に守ってほしいルールが2つあります。</p>
+
+            <h3>NG①：「円」と入力しない！</h3>
+            <div class="box-alert">
+                ❌ 悪い例：<strong>1000円</strong><br>
+                ⭕ 良い例：<strong>1000</strong>
+            </div>
+            <p>
+                「円」という文字が入ると、Excelはそれを「数字」ではなく「文字」として扱ってしまい、計算できません。<br>
+                見た目を「¥1,000」にしたい時は、数字だけ打ってから、上のメニューにある<strong>「¥」ボタン（通貨表示）</strong>を押してください。
+            </p>
+
+            <h3>NG②：セルの結合をしない！</h3>
+            <p>
+                「見出しをきれいにしたいから」とセルを結合（複数のマスを1つにつなげること）してしまうと、後で並べ替えができなくなります。<br>
+                <strong>1行につき1つのデータ</strong>を入力するのが鉄則です。
+            </p>
+        </section>
+
+        <section id="calc">
+            <h2>第4章：計算する（合計・残高）</h2>
+            <p>電卓は使いません。Excelに計算させましょう。</p>
+
+            <h3>合計を出す（SUM関数）</h3>
+            <p>レシートの合計などを出したい時です。</p>
+            <ol>
+                <li>合計を出したいセル（数字の列の一番下など）をクリック。</li>
+                <li>画面右上の<strong>「オートSUM（Σ）」</strong>ボタンをクリック。</li>
+                <li>点線で範囲が囲まれるので、正しければ <kbd>Enter</kbd> キーを押す。</li>
+            </ol>
+            <p>これだけで、一瞬で合計が出ます。数字を修正しても自動で再計算されます。</p>
+
+            <h3>残高を確かめる（引き算）</h3>
+            <p>「金庫にあるべきお金」と「実際のお金」が合っているか確認します。</p>
+            <div class="box-point">
+                <strong>数式：</strong> <code>= [入金の合計] - [出金の合計]</code>
+            </div>
+            <p>
+                セルに半角で <strong>=</strong> を入力し、入金合計のセルをクリック、<strong>-</strong>（マイナス）を入力、出金合計のセルをクリック、最後に <kbd>Enter</kbd> です。
+            </p>
+        </section>
+
+        <section id="analyze">
+            <h2>第5章：分析する（フィルタ）</h2>
+            <p>
+                「お菓子代にいくら使った？」「日付順じゃなくて金額順に並べたい」<br>
+                そんな時は<strong>「フィルター機能」</strong>を使います。これがExcelの真骨頂です。
+            </p>
+
+            <h3>設定方法</h3>
+            <ol>
+                <li>表の項目行（日付、科目…と書かれた行）を選択します。</li>
+                <li>メニューの「データ」タブから<strong>「フィルター（漏斗のマーク）」</strong>をクリック。</li>
+                <li>各項目に「▼」マークがつきます。</li>
+            </ol>
+
+            <h3>活用例</h3>
+            <ul>
+                <li><strong>科目の▼を押す：</strong> 「食費」だけにチェックを入れると、食費のデータだけが表示されます。</li>
+                <li><strong>日付の▼を押す：</strong> 「〇月」のデータだけ抽出できます。</li>
+            </ul>
+            <p>
+                この機能を使えば、来年の予算を組む時に「去年はいくらかかったっけ？」が一瞬で分かります。<br>
+                これが<strong>「未来へのバトン」</strong>になるデータ活用です。
+            </p>
+        </section>
+
+        <footer>
+            <p>作成日：2026年02月10日<br>広大神輝抄 会計係ファイアー</p>
+        </footer>
+
+    </div>
+</body>
+</html>
