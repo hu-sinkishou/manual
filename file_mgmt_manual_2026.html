@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>広大神輝抄 デジタル整理ハンドブック</title>
+    <title>広大神輝抄 ファイル管理マニュアル</title>
     <style>
-        /* デザイン設定（既存のスタイルを継承・拡張） */
+        /* デザイン設定 */
         :root {
             --primary-color: #2C3E50; /* 知的な紺色 */
             --accent-color: #E74C3C;  /* 警告の赤 */
@@ -26,7 +26,7 @@
         }
 
         .container {
-            max-width: 900px; /* 情報量が多いので少し広めに */
+            max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
@@ -44,6 +44,47 @@
         h1 { margin: 0; font-size: 2.2rem; letter-spacing: 0.05em; }
         .subtitle { font-size: 1.1rem; opacity: 0.9; margin-top: 10px; }
 
+        /* 目次スタイル（追加） */
+        .toc {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            border: 1px solid #eee;
+        }
+        .toc h2 {
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .toc li {
+            margin-bottom: 12px;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+        }
+        .toc li:last-child {
+            border-bottom: none;
+        }
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+            display: block;
+            transition: color 0.2s;
+        }
+        .toc a:hover {
+            color: var(--accent-color);
+            padding-left: 5px;
+        }
+
         section {
             background: var(--card-bg);
             padding: 40px;
@@ -60,13 +101,13 @@
         }
 
         h3 {
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 1.3rem;
             border-left: 5px solid var(--primary-color);
             padding-left: 15px;
             background-color: #f9f9f9;
-            padding-top: 5px;
-            padding-bottom: 5px;
+            padding: 8px 15px;
+            border-radius: 0 5px 5px 0;
         }
 
         /* OK/NG比較テーブル */
@@ -95,6 +136,7 @@
             padding: 2px 6px;
             border-radius: 4px;
             color: #d63384;
+            display: inline-block;
         }
 
         /* コラム・ポイント */
@@ -105,6 +147,9 @@
             margin: 20px 0;
             border-radius: 8px;
         }
+        .box-point ul { margin: 0; padding-left: 20px; }
+        .box-point li { margin-bottom: 10px; }
+        
         .box-alert {
             background-color: #FFF4E5;
             border: 2px solid var(--accent-color);
@@ -121,15 +166,22 @@
             padding: 20px;
             border-radius: 8px;
             overflow-x: auto;
+            margin: 20px 0;
         }
 
         footer { text-align: center; padding: 40px 0; color: #888; }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 1.6rem; }
+            section { padding: 20px; }
+            .comparison-table th, .comparison-table td { display: block; width: 100%; box-sizing: border-box; }
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>広大神輝抄 デジタル整理ハンドブック</h1>
+        <h1>広大神輝抄 ファイル管理マニュアル</h1>
         <div class="subtitle">「ファイルがない！」をゼロにする、一生使えるPCスキル</div>
     </header>
 
@@ -144,7 +196,18 @@
             </p>
         </section>
 
-        <section>
+        <div class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#chapter1">第1章：ファイル名の「鉄の掟」</a></li>
+                <li><a href="#chapter2">第2章：バージョン管理（「最新」の罠）</a></li>
+                <li><a href="#chapter3">第3章：並び順を操るテクニック</a></li>
+                <li><a href="#chapter4">第4章：フォルダ構成の「あるべき姿」</a></li>
+                <li><a href="#chapter5">第5章：知っておくとカッコいい応用知識</a></li>
+            </ul>
+        </div>
+
+        <section id="chapter1">
             <h2>第1章：ファイル名の「鉄の掟」</h2>
             <p>パソコンの中でファイルを迷子にさせないための、絶対的なルールです。</p>
 
@@ -180,19 +243,27 @@
 
             <h3>2. 日付は「頻度」で使い分ける</h3>
             <p>
-                「いつのデータか」が分かればOKです。年に1回しか作らないファイルに、わざわざ日付まで入れる必要はありません。
+                「いつのデータか」が分かればOKです。年に1回しか作らないファイルに、わざわざ日付8桁（年月日）まで入れる必要はありません。
                 <strong>ファイルの作成頻度に合わせて、長さを調整しましょう。</strong>
             </p>
             <div class="box-point">
-                <strong>【松】 年に1回のファイル（予算案・決算など）</strong><br>
-                → <span class="filename">2026_年間予算案.xlsx</span> （西暦4桁のみ）<br>
-                <br>
-                <strong>【竹】 月に1回のファイル（月次報告・領収書まとめ）</strong><br>
-                → <span class="filename">202604_4月度報告書.docx</span> （西暦4桁 + 月2桁）<br>
-                ※「4月」は必ず「04」と書くこと！「11月」と順番がズレるのを防げます。<br>
-                <br>
-                <strong>【梅】 毎日・不定期のファイル（議事録・イベント写真）</strong><br>
-                → <span class="filename">20261103_学祭集合写真.jpg</span> （西暦4桁 + 月2桁 + 日2桁）
+                <ul>
+                    <li>
+                        <strong>【松】 年に1回のファイル（予算案・決算など）</strong><br>
+                        → <span class="filename">2026_年間予算案.xlsx</span><br>
+                        <small>（西暦4桁のみでOK）</small>
+                    </li>
+                    <li>
+                        <strong>【竹】 月に1回のファイル（月次報告・領収書まとめ）</strong><br>
+                        → <span class="filename">202604_4月度報告書.docx</span><br>
+                        <small>（西暦4桁 + 月2桁） ※「4月」は必ず「04」と書くこと！</small>
+                    </li>
+                    <li>
+                        <strong>【梅】 毎日・不定期のファイル（議事録・イベント写真）</strong><br>
+                        → <span class="filename">20261103_学祭集合写真.jpg</span><br>
+                        <small>（西暦4桁 + 月2桁 + 日2桁）</small>
+                    </li>
+                </ul>
             </div>
 
             <h3>3. 「空白」と「記号」は使わない</h3>
@@ -219,23 +290,9 @@
             <p>
                 「定例会」と検索窓に入力するだけで、1年分の議事録がズラッと並ぶようになります。
             </p>
-
-            <h3>5. 名前は「短く、簡潔に」</h3>
-            <p>
-                ファイル名が長すぎると、スマホで見た時に後ろが見えなくなってしまいます。
-                不要な言葉は削りましょう。
-            </p>
-            <div class="step">
-                <div class="step-number">×</div>
-                <div>20260210_広大神輝抄_第3回新歓実行委員会_議事録.docx<br>（親切だけど長すぎる...）</div>
-            </div>
-            <div class="step">
-                <div class="step-number" style="background-color: #27AE60;">◎</div>
-                <div>20260210_第3回新歓議事録.docx<br>（フォルダに入っていれば「広大神輝抄」は不要！）</div>
-            </div>
         </section>
 
-        <section>
+        <section id="chapter2">
             <h2>第2章：バージョン管理（「最新」の罠）</h2>
             <p>修正を重ねるうちに、「どれが本当の最終版！？」とパニックになるのを防ぎます。</p>
 
@@ -268,7 +325,7 @@
             </p>
         </section>
 
-        <section>
+        <section id="chapter3">
             <h2>第3章：並び順を操るテクニック</h2>
             <p>ファイルを開く順番が決まっている場合（スライドショーやマニュアルなど）の技です。</p>
 
@@ -283,7 +340,7 @@
             </div>
         </section>
 
-        <section>
+        <section id="chapter4">
             <h2>第4章：フォルダ構成の「あるべき姿」</h2>
             <p>デスクトップにファイルを散らかしていませんか？ 階層構造（ツリー）を意識しましょう。</p>
 
@@ -301,19 +358,36 @@
                 ├── 📂 02_イベント別<br>
                 │   ├── 📂 202605_新歓<br>
                 │   └── 📂 202611_大学祭<br>
-                │       ├── 20261103_大学祭収支_v2.xlsx<br>
+                │       ├── 20261103_収支表_v2.xlsx<br>
                 │       └── 📂 レシート画像<br>
                 │<br>
                 └── 📂 99_過去データアーカイブ <span style="color:#aaa;">← 終わった年度はここへ</span>
             </div>
+            
+            <h3>【重要】フォルダを使えばファイル名は短くなる！</h3>
             <p>
-                <strong>ポイント：</strong><br>
-                フォルダ名にも番号（01, 02...）を振っておくと、並び順が固定されて見やすくなります。<br>
-                デスクトップには「ショートカット」だけを置き、本体はこのフォルダの中にしまいましょう。
+                時々、ファイル名に「サークル名」や「イベント名」を全部入れようとする人がいますが、長すぎて見づらくなります。<br>
+                <strong>フォルダに入っていれば、その情報は省略できます。</strong>
             </p>
+            <table class="comparison-table">
+                <tr>
+                    <th style="color: var(--accent-color);">✖ 丁寧すぎて長い</th>
+                    <th style="color: var(--success-color);">◎ フォルダを活用</th>
+                </tr>
+                <tr>
+                    <td class="ng-cell">
+                        広大神輝抄_2026年大学祭_会計_収支表.xlsx<br>
+                        <small>スマホで見ると後ろが見えない！</small>
+                    </td>
+                    <td class="ok-cell">
+                        <span class="filename">20261103_収支表_v1.xlsx</span><br>
+                        <small>「大学祭」フォルダの中にあるなら、これで十分通じます。</small>
+                    </td>
+                </tr>
+            </table>
         </section>
 
-        <section>
+        <section id="chapter5">
             <h2>第5章：知っておくとカッコいい応用知識</h2>
             <p>ここからは「できたら凄い」レベルですが、トラブル回避に役立ちます。</p>
 
@@ -372,7 +446,7 @@
         </section>
 
         <footer>
-            <p>「整理整頓は、未来の自分への最大の親切」<br>広大神輝抄 会計係</p>
+            <p>作成日：2026年02月10日<br>広大神輝抄 会計係ファイアー</p>
         </footer>
 
     </div>
