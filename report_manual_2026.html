@@ -33,7 +33,7 @@
         header {
             text-align: center;
             padding: 60px 20px;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* 少し知的な濃い青に変更 */
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
             border-radius: 0 0 20px 20px;
             margin-bottom: 40px;
@@ -50,6 +50,39 @@
             font-size: 1.1rem;
             opacity: 0.9;
             margin-top: 10px;
+        }
+
+        /* 目次 */
+        .toc {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .toc h2 {
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+            color: var(--text-color); /* 目次の見出しは黒系で統一 */
+            border-left: none; /* 左の線は消す */
+            padding-left: 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin-bottom: 10px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .toc a:hover {
+            text-decoration: underline;
         }
 
         /* セクション */
@@ -92,6 +125,25 @@
             border-radius: 4px;
         }
 
+        /* ステップ表示 */
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
         /* リスト */
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
@@ -101,6 +153,12 @@
             padding: 40px 0;
             color: #888;
             font-size: 0.9rem;
+        }
+
+        /* レスポンシブ */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.6rem; }
+            section { padding: 20px; }
         }
     </style>
 </head>
@@ -121,50 +179,62 @@
             </p>
         </section>
 
-        <section>
-            <h2>第1章：報告書の構成（4つの柱）</h2>
-            <p>良い報告書には「型」があります。以下の4つの要素を必ず入れて作成してください。</p>
+        <div class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#structure">第1章：報告書の構成（3つの柱）</a></li>
+                <li><a href="#analysis">第2章：戦略に使える分析の例</a></li>
+                <li><a href="#save">第3章：ファイルの保存について</a></li>
+            </ul>
+        </div>
 
-            <h3>1. エグゼクティブ・サマリー（要約）</h3>
+        <section id="structure">
+            <h2>第1章：報告書の構成（3つの柱）</h2>
+            <p>良い報告書には「型」があります。以下の3つの要素を含めて作成しましょう。</p>
+
+            <h3>1. 収支報告（PL）</h3>
             <p>
-                忙しい人がここだけ読めば分かるように、冒頭に結論を書きます。<br>
-                <strong>「勝因」「敗因」「来年への申し送り」</strong>の3点を簡潔にまとめてください。
+                イベント全体のお金の流れを確定させます。<br>
+                「売上」－「経費（立替分含む）」＝「最終利益」を算出し、誰がいくら立て替えたかも明記してください。
             </p>
 
-            <h3>2. 収支報告（PL）</h3>
-            <p>売上、経費、利益の確定額です。誰が立て替えたかも明記しましょう。</p>
+            <h3>2. 定量分析（データ）</h3>
+            <p>
+                「なんとなく売れた」で終わらせず、事実（数字）をグラフや表にします。<br>
+                時間ごとの売上や、商品ごとの人気度などを可視化します。
+            </p>
 
-            <h3>3. 定量分析（データ）</h3>
-            <p>「何時に売れたか？」「誰に売れたか？」をグラフや表にします。</p>
-
-            <h3>4. 定性分析（現場の声）</h3>
-            <p>数字には表れない「オペレーションの不備」や「現場の気付き」を記録します。</p>
+            <h3>3. 定性分析（現場の声）</h3>
+            <p>
+                数字には表れない「オペレーションの不備」や「現場の気付き」を箇条書きで記録します。<br>
+                （例：レジの混雑具合、お客さんの反応、伝達ミスの有無など）
+            </p>
         </section>
 
-        <section>
-            <h2>第2章：データを武器にする「分析の視点」</h2>
-            <p>報告書には、ただグラフを貼るだけでなく、以下の視点での「考察」を加えてください。</p>
+        <section id="analysis">
+            <h2>第2章：戦略に使える分析の例</h2>
+            <p>報告書を作成する際、「次回の戦略」に役立つ分析の切り口をいくつか紹介します。<br>これらを参考に、その時のイベントに合わせて必要な分析を行ってみてください。</p>
 
-            <h3>① 時間別分析</h3>
+            <h3>① 時間別分析（シフト配置のヒント）</h3>
             <p>
-                お客様のピークはいつでしたか？<br>
-                （例：2025年は夕方17時～19時がピークでした。これを知ることで、来年はシフトを最適化できます）
+                <strong>「いつ、お客さんが一番来たか？」</strong>を知るための分析です。<br>
+                例えば2025学園祭では、昼ではなく「17時～19時」がピークだと判明しました。これを知ることで、来年は忙しい時間に人員を厚くするなどの対策が打てます。
             </p>
 
-            <h3>② 商品別・客層別クロス分析</h3>
+            <h3>② 商品別・客層別クロス分析（ターゲットの把握）</h3>
             <p>
-                「誰が・何を」買ったか分析します。<br>
-                （例：魔理沙は王道、フランは女性層、霊夢は家族連れ、といった傾向を掴みます）
+                <strong>「誰が、何を買ってくれたか？」</strong>を深掘りします。<br>
+                「魔理沙は誰にでも売れる王道」「フランは女性に人気」「霊夢は家族連れ」といった傾向が分かれば、呼び込みのセリフや仕込み数を調整できます。
             </p>
 
             <h3>③ セット購入分析（ヒートマップ）</h3>
             <p>
-                一緒に買われやすい組み合わせを見つけます。<br>
-                （例：ワッフルと物販は意外とセットで買われない→だからこそセット割引を仕掛ける、など）
+                <strong>「何と何が一緒に買われたか？」</strong>を見ます。<br>
+                例えば、「ワッフルと物販は意外と一緒に買われない（相関がない）」 と分かれば、次はセット割引を作って合わせ買いを誘導しよう、といった戦略が立てられます。
             </p>
         </section>
 
-        <section>
+        <section id="save">
             <h2>第3章：ファイルの保存について（重要）</h2>
             <p>作成した報告書（PDF）のファイル名や保存場所については、以下のマニュアルにて厳密に規定されています。</p>
             
@@ -173,7 +243,7 @@
                 <p><strong>参照ファイル： <code>[2026_ファイル管理マニュアル.pdf]</code></strong></p>
                 <p>
                     ※検索性を高めるため、自己流の名前では保存しないでください。<br>
-                    上記マニュアルにある命名規則（西暦_イベント名...等）を必ず守って保存・共有を行ってください。
+                    上記マニュアルにある命名規則を必ず守って保存・共有を行ってください。
                 </p>
             </div>
         </section>
