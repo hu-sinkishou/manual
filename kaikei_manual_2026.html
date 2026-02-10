@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広大神輝抄 会計ハンドブック</title>
+    <style>
+        /* 全体のデザイン設定 */
+        :root {
+            --primary-color: #4A90E2; /* 優しい青 */
+            --accent-color: #F5A623;  /* 注意喚起のオレンジ */
+            --text-color: #333333;
+            --bg-color: #F4F7F9;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ヘッダー周り */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* 目次 */
+        .toc {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .toc h2 {
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+        .toc li {
+            margin-bottom: 10px;
+        }
+        .toc a {
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+        }
+
+        /* 各セクション */
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        h3 {
+            margin-top: 30px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        /* 重要なポイントのボックス */
+        .box-point {
+            background-color: #E8F4FD;
+            border-left: 4px solid var(--primary-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .box-alert {
+            background-color: #FFF4E5;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        /* ステップ表示 */
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        /* フッター */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 600px) {
+            h1 { font-size: 1.6rem; }
+            section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>広大神輝抄 会計ハンドブック</h1>
+        <div class="subtitle">未来へつなぐサークル運営の道しるべ</div>
+    </header>
+
+    <div class="container">
+
+        <section>
+            <p><strong>会計係になったあなたへ</strong></p>
+            <p>
+                会計係への就任、ありがとうございます！<br>
+                「会計」と聞くと、「計算が大変そう」「責任が重い」と感じるかもしれません。でも大丈夫です。このハンドブックは、あなたが迷わずに、そして安心して活動できるように作りました。
+            </p>
+            <p>
+                会計の仕事は、単なる「集金係」ではありません。<br>
+                サークルの活動履歴を守り、来年のイベントをより良くするための<strong>「未来へのバトン」を作る、とてもクリエイティブな役割</strong>なんです。
+            </p>
+            <p>困ったときは一人で抱え込まず、すぐに代表や周りのメンバーを頼ってくださいね。</p>
+        </section>
+
+        <div class="toc">
+            <h2>目次</h2>
+            <ul>
+                <li><a href="#mindset">第1章：知っておいてほしい3つの心構え</a></li>
+                <li><a href="#routine">第2章：普段のお仕事（承認・精算）</a></li>
+                <li><a href="#event">第3章：イベントの時（お祭り・大学祭）</a></li>
+                <li><a href="#trouble">第4章：もしも困ったら（トラブル対応）</a></li>
+            </ul>
+        </div>
+
+        <section id="mindset">
+            <h2>第1章：知っておいてほしい3つの心構え</h2>
+            <p>会計係として大切にしてほしいことが、3つだけあります。</p>
+
+            <h3>1. 今を守る（正確さ）</h3>
+            <p>
+                サークルのお金は、部員みんなから預かった大切な「活動の源」です。
+                1円のズレも「まあいいか」とせず、正確に管理しましょう。最高規約でも、財政は適切に処理することが決められています。
+            </p>
+
+            <h3>2. 信頼を守る（透明性）</h3>
+            <p>
+                一番怖いのは、お金のトラブルで仲間の信頼を失うことです。
+                <strong>「公私混同」は絶対にNG！</strong> 自分の財布とサークルのお金は、物理的に分けて管理しましょう。たとえ少額でも「なぁなぁ」にしないことが、あなた自身を守ることになります。
+            </p>
+
+            <h3>3. 未来を創る（記録）</h3>
+            <div class="box-point">
+                <strong>ここが一番のポイントです！</strong><br>
+                あなたがExcelに入力する1行は、来年の後輩がイベントを成功させるための貴重なヒントになります。
+            </div>
+            <ul>
+                <li>「なぜこの金額を使ったのか？」</li>
+                <li>「予算は足りたのか、余ったのか？」</li>
+            </ul>
+            <p>
+                この記録（データ）があれば、来年はもっと賢くお金を使えます。「過去のデータを使って、現在をより良くする」。これができると、会計の仕事はもっと面白くなりますよ。
+            </p>
+        </section>
+
+        <section id="routine">
+            <h2>第2章：普段のお仕事（ルール）</h2>
+            <p>ここでは、日々の活動でのお金の扱い方を説明します。基本ツールは <strong>Excel</strong> と <strong>Discord</strong> です。</p>
+
+            <h3>① お金を使う時のルール（承認フロー）</h3>
+            <p>何かを買う時は、<strong>「事前の承認」</strong>が基本です。Discordの「会計連絡」チャンネルを活用しましょう。</p>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div>Discordに「これを買いたいです（金額〇〇円）」と投稿する。</div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div><strong>「みなし承認」ルール：</strong> 投稿から3日以内に反対意見がなければ承認とみなします。</div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div>買い物をしたら、必ず<strong>「レシート」</strong>をもらう！</div>
+            </div>
+            <div class="box-alert">
+                <strong>注意：</strong> 宛名は「広大神輝抄」または「空欄」でもらってください。<br>
+                レシートがないと、原則としてお金は返せません。
+            </div>
+
+            <h3>② お金を返す時（精算）</h3>
+            <p>立て替えたお金は、<strong>定例会の前後</strong>に精算します。</p>
+            <ul>
+                <li>金庫からお金を出す時は、必ず相手と一緒にその場で数えてください。</li>
+                <li>渡した後は、必ず「受領サイン」をもらいましょう（ノート等に記録）。これがお金を渡した証拠になります。</li>
+            </ul>
+
+            <h3>③ 金庫の管理</h3>
+            <p>金庫は私たちの銀行です。</p>
+            <ul>
+                <li>鍵の場所は、代表とあなただけの秘密です。</li>
+                <li>月1回、金庫の中身とExcelの残高が合っているか確認しましょう（残高確認）。</li>
+            </ul>
+        </section>
+
+        <section id="event">
+            <h2>第3章：イベントの時（お祭り・大学祭）</h2>
+            <p>イベントはお金が大きく動くタイミングです。盗難リスクを下げるため、運用ルールを決めています。</p>
+
+            <h3>1. 全財産を持ち出さない！</h3>
+            <p>
+                これまでは金庫ごと全額を会場に持って行っていましたが、<strong>盗難のリスクを減らすためにルールを変えました。</strong>
+            </p>
+            <div class="box-point">
+                <strong>新ルール：</strong> 持ち出すのは「釣り銭」と「予備費」だけ。<br>
+                いくら必要かは、過去2回分の実績データ（Excel）を見て決めましょう。
+            </div>
+
+            <h3>2. 売上の管理</h3>
+            <p>イベント中は忙しいですが、お金の管理はしっかりと。</p>
+            <ul>
+                <li>売上金はこまめにまとめて、代表や責任者が保管します。</li>
+                <li>終わったら、その日のうちに全部員立ち会いのもとで集計し、金庫に戻しましょう。</li>
+                <li>利益は原則として部費（次年度繰越）になります。飲み会などに使う場合は、必ず定例会で承認を得てください。</li>
+            </ul>
+        </section>
+
+        <section id="trouble">
+            <h2>第4章：もしも困ったら（トラブル対応）</h2>
+            <p>人間だもの、失敗することはあります。大事なのは「隠さないこと」です。</p>
+
+            <h3>計算が合わない時</h3>
+            <p>焦らずに再計算し、それでもダメなら正直に代表に報告しましょう。原因を一緒に探します。</p>
+
+            <h3>レシートを無くした時</h3>
+            <p>
+                「理由書」を書いてもらいます。基本は精算できませんが、やむを得ない事情がある場合は定例会で相談しましょう。（性善説での運用ですが、ルールは守りましょう）
+            </p>
+
+            <h3>キャンセル料やペナルティ</h3>
+            <p>
+                懲戒規則に基づき、キャンセル料などが発生した場合は、トラブル防止のため<strong>「代表が徴収」</strong>し、その後会計に渡す流れを推奨します。
+            </p>
+        </section>
+
+        <footer>
+            <p>作成日：202X年〇月〇日<br>広大神輝抄 会計係</p>
+        </footer>
+
+    </div>
+</body>
+</html>
