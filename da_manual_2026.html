@@ -8,8 +8,7 @@
         /* デザイン設定（赤系・ファイアーモデル） */
         :root {
             --primary-color: #C62828; /* 情熱の赤 */
-            --primary-light: #FFEBEE; /* 薄い赤（背景用） */
-            --accent-color: #FF8F00;  /* 炎のオレンジ・ゴールド */
+            --primary-dark:  #b71c1c; /* 濃い赤（ヘッダー用） */
             --text-color: #333333;
             --bg-color: #F9F9F9;
             --card-bg: #FFFFFF;
@@ -78,35 +77,44 @@
 
         h2 {
             color: var(--primary-color);
-            border-left: 5px solid var(--primary-color);
+            border-left: 6px solid var(--primary-color);
             padding-left: 15px;
             margin-top: 0;
+            font-weight: bold;
         }
 
         h3 {
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 1.2rem;
             border-bottom: 1px solid #eee;
             padding-bottom: 5px;
+            color: #444;
         }
 
-        /* 強調ボックス */
+        /* 強調ボックス（視認性向上版） */
+        /* ポイント：青系で知的かつ冷静に目立たせる */
         .box-point {
-            background-color: var(--primary-light);
-            border-left: 4px solid var(--primary-color);
+            background-color: #E3F2FD; /* 薄い青 */
+            border-left: 6px solid #1E88E5; /* 鮮やかな青 */
             padding: 15px;
-            margin: 20px 0;
+            margin: 25px 0;
             border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            color: #0D47A1;
         }
+        .box-point strong { color: #1565C0; font-size: 1.05em; }
 
+        /* アラート：黄色系で注意喚起 */
         .box-alert {
-            background-color: #FFF3E0;
-            border-left: 4px solid var(--accent-color);
+            background-color: #FFFDE7; /* 薄い黄色 */
+            border-left: 6px solid #FBC02D; /* 濃い黄色 */
             padding: 15px;
-            margin: 20px 0;
+            margin: 25px 0;
             border-radius: 4px;
-            color: #bf360c;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            color: #5D4037;
         }
+        .box-alert strong { color: #E65100; font-size: 1.05em; }
 
         /* テーブル */
         .excel-table {
@@ -135,6 +143,7 @@
             font-family: Consolas, Monaco, "Andale Mono", monospace;
             font-size: 0.9rem;
             margin: 20px 0;
+            border: 1px solid #ddd;
         }
         code { font-family: inherit; }
         .comment { color: #5c6370; font-style: italic; }
@@ -272,6 +281,37 @@ corr_pairs = corr_pairs[corr_pairs < 1.0]
 print(corr_pairs.head(10))
 </code></pre>
 
+            <h3>分析結果の見方（相関係数の目安）</h3>
+            <p>計算された数字（相関係数）をどう判断すればいいか、以下の表を参考にしてください。</p>
+            
+            <table class="excel-table" style="width: auto; margin: 20px auto;">
+                <tr>
+                    <th style="background-color: #333; color: white;">相関係数</th>
+                    <th style="background-color: #333; color: white;">判定</th>
+                    <th style="background-color: #333; color: white;">推奨アクション</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center; font-weight: bold;">0.7 〜 1.0</td>
+                    <td style="color: #d32f2f; font-weight: bold;">非常に強い</td>
+                    <td>袋詰めして<strong>「セット販売」</strong>にする</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">0.4 〜 0.7</td>
+                    <td>やや強い</td>
+                    <td>近くに並べて<strong>「ついで買い」</strong>を狙う</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">0.2 〜 0.4</td>
+                    <td>弱い</td>
+                    <td>特に関係なし</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; color: #888;">0.0 〜 0.2</td>
+                    <td style="color: #888;">なし</td>
+                    <td style="color: #888;">無視してOK</td>
+                </tr>
+            </table>
+
             <h3>2025年の分析結果</h3>
             <p>このコードを実行すると、以下の結果が得られました。</p>
             <ul>
@@ -293,7 +333,7 @@ print(corr_pairs.head(10))
             </p>
             <p style="font-size:0.9em; color:#666;">※実行には「DB Browser for SQLite」などのツールが必要です。導入はWeb検索してください。</p>
 
-            <h3>クエリ（命令文）の例</h3>
+            <h3>抽出クエリ：高額購入者のリスト化</h3>
 <pre><code><span class="keyword">SELECT</span> 
     時刻, 
     客層, 
@@ -305,32 +345,27 @@ print(corr_pairs.head(10))
 <span class="keyword">ORDER BY</span> 
     合計金額 <span class="keyword">DESC</span>;</code></pre>
 
-            <table class="excel-table">
-                <tr>
-                    <th>命令</th>
-                    <th>意味</th>
-                </tr>
-                <tr>
-                    <td><strong>SELECT</strong></td>
-                    <td>欲しい列を選ぶ（時刻、客層、金額が見たい）</td>
-                </tr>
-                <tr>
-                    <td><strong>FROM</strong></td>
-                    <td>どのデータから？（all_log から）</td>
-                </tr>
-                <tr>
-                    <td><strong>WHERE</strong></td>
-                    <td>条件は？（1,500円以上買ってくれた人）</td>
-                </tr>
-                <tr>
-                    <td><strong>ORDER BY</strong></td>
-                    <td>並び順は？（金額が高い順 = DESC）</td>
-                </tr>
-            </table>
+            <h3>集計クエリ：Excelのピボットテーブルと同じことをする</h3>
             <p>
-                これを実行すると、誰が高額購入してくれたかが一瞬でリスト化されます。<br>
-                「家族連れが高額購入しやすい」などの傾向が見えてくるはずです。
+                SQLの凄いところは、集計も一瞬で書けるところです。<br>
+                以下は<strong>「客層ごとに、いくら売上があったか？」</strong>を集計する魔法のコードです。
             </p>
+
+<pre><code><span class="keyword">SELECT</span> 
+    客層, 
+    <span class="function">SUM</span>(合計金額) <span class="keyword">AS</span> 売上合計
+<span class="keyword">FROM</span> 
+    all_log 
+<span class="keyword">GROUP BY</span> 
+    客層
+<span class="keyword">ORDER BY</span> 
+    売上合計 <span class="keyword">DESC</span>;</code></pre>
+
+            <div class="box-point">
+                <strong>解説：</strong><br>
+                <code>GROUP BY</code>（グループバイ）という命令を使うと、「客層」という項目ごとにデータをまとめて計算してくれます。<br>
+                Excelでマウスを動かして設定していた作業が、この数行のコードだけで完結します。
+            </div>
         </section>
 
         <section id="action">
