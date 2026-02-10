@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>広大神輝抄 Excelマニュアル</title>
+    <title>広大神輝抄 会計マニュアル - Excel編</title>
     <style>
-        /* 共通デザイン設定（前回を踏襲） */
+        /* 共通デザイン設定 */
         :root {
-            --primary-color: #217346; /* Excelカラーの緑に変更 */
+            --primary-color: #217346; /* Excelカラーの緑 */
             --accent-color: #D32F2F;  /* 注意喚起の赤 */
             --text-color: #333333;
             --bg-color: #F4F7F9;
@@ -42,6 +42,39 @@
 
         h1 { margin: 0; font-size: 2.0rem; letter-spacing: 0.05em; }
         .subtitle { font-size: 1.0rem; opacity: 0.9; margin-top: 10px; }
+
+        /* 目次（デザイン修正済み） */
+        .toc {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .toc h2 {
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        .toc ul {
+            list-style: none; /* 黒点を消す */
+            padding: 0;
+        }
+        .toc li {
+            margin-bottom: 10px;
+        }
+        .toc a {
+            text-decoration: none; /* 下線を消す */
+            color: var(--primary-color);
+            font-weight: bold;
+            display: block; /* クリック領域を広げる */
+            padding: 5px 0;
+        }
+        .toc a:hover {
+            text-decoration: underline;
+            color: #154c2d;
+        }
 
         /* セクション */
         section {
@@ -133,14 +166,6 @@
 
     <div class="container">
 
-        <section>
-            <p>
-                <strong>「Excel（エクセル）は、あなたの最強のパートナーです」</strong><br>
-                このマニュアルでは、サークルの会計業務に必要なExcel操作に絞って解説します。<br>
-                難しい関数を覚える必要はありません。基本の型とルールさえ守れば、計算ミスゼロの運営が可能です。
-            </p>
-        </section>
-
         <div class="toc">
             <h2>目次</h2>
             <ul>
@@ -210,7 +235,27 @@
                 </tr>
             </table>
 
-            <h3>2. 「1セル・1情報」の原則</h3>
+            <h3>2. 文字情報は「備考」列に逃がす</h3>
+            <p>
+                「レシート紛失」「後で確認する」といったメモ書きを、数字の入ったセルに書き込んではいけません。計算ができなくなるからです。
+            </p>
+            <p>
+                そういう時は、<strong>「備考」というヘッダー（列）</strong>を作ってください。<br>
+                数字の列は数字専用にして守り、文字情報はすべて「備考」列に書く。これがデータをきれいに保つコツです。
+            </p>
+            <table class="excel-table" style="width: 100%;">
+                <tr>
+                    <th width="30%">日付</th>
+                    <th width="30%">金額</th>
+                    <th>備考（メモ）</th>
+                </tr>
+                <tr>
+                    <td>5/10</td>
+                    <td>1,200</td>
+                    <td>レシート紛失のため出金伝票で対応</td>
+                </tr>
+            </table>
+            <h3>3. 「1セル・1情報」の原則</h3>
             <p>
                 1つのセル（マス目）には、1つの情報だけを入れます。<br>
                 「単価と個数」を同じセルに入れたり、「日付と曜日」を混ぜたりすると、後で集計ができなくなります。
@@ -220,7 +265,7 @@
                 <li><strong>OK：</strong> 「10/24」の列と、「月曜日」の列を分ける（または曜日は入力しない）</li>
             </ul>
 
-            <h3>3. 表の外で計算する時だけ「ラベル」を使う</h3>
+            <h3>4. 表の外で計算する時だけ「ラベル」を使う</h3>
             <p>
                 表としてのデータ入力（リスト作成）とは別に、最終的な<strong>「合計」</strong>や<strong>「残高」</strong>などを表の外側に表示させたい場合のみ、隣のセルに名前（ラベル）を付けます。
             </p>
@@ -235,7 +280,7 @@
                 <div style="color: #666; font-size: 0.9em;">← このようにセルを分けます</div>
             </div>
 
-            <h3>4. 「シート」を使い分ける</h3>
+            <h3>5. 「シート」を使い分ける</h3>
             <p>
                 1つのシートにあれこれ詰め込まず、目的ごとにシート（タブ）を分けましょう。<br>
                 「4月」「5月」のように時系列で分けるのが基本ですが、月が変わってもヘッダーの並び順（フォーマット）は変えないようにしましょう。
@@ -245,8 +290,8 @@
         <section id="input-rule">
             <h2>第3章：入力の鉄則</h2>
             <p>
-                Excelは「見せる資料」であると同時に「計算機」でもあります。<br>
-                正しく計算させるために、守るべきルールがあります。
+                ここからは、セルの中にデータを打ち込む時の具体的なルールです。<br>
+                キーワードは<strong>「数字は数字のままに」</strong>です。
             </p>
 
             <h3>NG①：「円」や「単位」を入力しない</h3>
