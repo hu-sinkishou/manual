@@ -185,33 +185,37 @@
                 2025年のデータを使って、実際に手を動かしてみましょう。
             </p>
 
-            <h3>STEP 1：データの下準備（時刻の抽出）</h3>
-            <p>
-                <code>all_log.csv</code> をExcelで開いてください。<br>
-                B列に「2025-11-01 10:41:22」といった時刻が入っていますが、このままでは細かすぎて集計できません。<br>
-                「10時」「11時」という大まかな数字を取り出します。
-            </p>
+            <h3>STEP 1：正しいデータの読み込み方（文字化け防止）</h3>
+            <div class="box-alert">
+                <strong>⚠️ 注意：CSVファイルをダブルクリックしないでください！</strong><br>
+                直接開くと文字化けしたり、「090」が「90」になったりとデータが壊れる原因になります。<br>
+                必ず以下の手順で<strong>「インポート」</strong>してください。
+            </div>
             <div class="box-point">
-                <strong>手順：</strong><br>
-                1. 空いている列（例：J列）の1行目に「時間」と入力<br>
-                2. その下のセル（J2）に <code>=HOUR(B2)</code> と入力<br>
-                3. オートフィルで一番下までコピー<br>
-                <span style="font-size:0.9em; color:#666;">これで「10」や「17」といった数字だけが取り出せます。</span>
+                <strong>正しい手順：</strong><br>
+                1. Excelを「空白のブック」で新規作成して開く<br>
+                2. <strong>[データ]</strong> タブをクリック<br>
+                3. <strong>[テキストまたはCSVから]</strong> をクリックして <code>all_log.csv</code> を選択<br>
+                4. プレビュー画面が出たら、そのまま <strong>[読み込み]</strong> をクリック<br>
+                <span style="font-size:0.9em; color:#666;">これで文字化けのない、きれいなテーブルとして取り込まれます。</span>
             </div>
 
             <h3>STEP 2：ピボットテーブルで集計</h3>
             <p>
-                「時間」と「売上金額」の関係を表にします。<br>
-                表全体を選択し、<strong>[挿入] → [ピボットテーブル]</strong> をクリックします。
+                取り込んだ表の中にカーソルを置き、<strong>[挿入] → [ピボットテーブル]</strong> をクリックします。<br>
+                わざわざ関数で「何時」を取り出さなくても、Excelが自動で判別してくれます。
             </p>
             <table class="excel-table">
                 <tr>
                     <th width="30%">設定項目</th>
-                    <th>配置場所</th>
+                    <th>操作</th>
                 </tr>
                 <tr>
                     <td><strong>行</strong></td>
-                    <td>先ほど作った<strong>「時間」</strong></td>
+                    <td>
+                        <strong>「時刻」</strong>をドラッグ＆ドロップ<br>
+                        <span style="font-size:0.8em; color:#d32f2f;">※自動的に「時」「分」などにグループ化されます。<br>「時」だけを残し、他（分など）は枠外へ捨ててください。</span>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>値</strong></td>
