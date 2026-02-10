@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広大神輝抄 データ分析マニュアル - 2026</title>
+    <style>
+        /* デザイン設定 */
+        :root {
+            --primary-color: #2c3e50; /* 知的なダークネイビー */
+            --accent-color: #e74c3c;  /* 情熱の赤 */
+            --code-bg: #f8f9fa;
+            --text-color: #333;
+            --bg-color: #ecf0f1;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* ヘッダー */
+        header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+        h1 { margin: 0; color: var(--primary-color); }
+        .subtitle { color: #7f8c8d; margin-top: 5px; }
+
+        /* セクション */
+        section { margin-bottom: 50px; }
+        h2 {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 1.4rem;
+        }
+        h3 {
+            border-left: 5px solid var(--accent-color);
+            padding-left: 10px;
+            margin-top: 30px;
+        }
+
+        /* コードブロック */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, Monaco, "Andale Mono", monospace;
+        }
+        code { color: #c7254e; background-color: #f9f2f4; padding: 2px 4px; border-radius: 3px; }
+
+        /* テーブル */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        
+        /* インサイトボックス */
+        .insight-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .insight-title { font-weight: bold; display: block; margin-bottom: 5px; }
+
+        /* 注意書き */
+        .note { font-size: 0.9em; color: #666; margin-top: 5px; }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>データ分析マニュアル</h1>
+        <div class="subtitle">「勘」から「根拠」へ - 次の勝利を設計する技術</div>
+    </header>
+
+    <section>
+        <p>
+            本マニュアルは、収集したレジデータ（CSV）を分析し、次回の戦略立案に役立てるための手順書です。<br>
+            全員必修の「Excel分析」から、上級者向けの「Python/SQL解析」までを網羅しています。
+        </p>
+        <div class="insight-box">
+            <span class="insight-title">📂 使用データについて</span>
+            本マニュアルでは <code>all_log.csv</code> を使用します。<br>
+            このファイルには、「いつ」「誰が」「何を買ったか」の全記録（524件）が記録されています。
+        </div>
+    </section>
+
+    <section>
+        <h2>第1章：【必修】Excelで「ピーク」を知る</h2>
+        <p>まずは全員が使えるExcelで、<strong>「魔の時間帯（最も忙しい時間）」</strong>を特定します。</p>
+
+        <h3>STEP 1: データの前処理（時刻の抽出）</h3>
+        <p>CSVをExcelで開いただけでは、「2025-11-01 10:41:22」という細かい時刻データしかありません。<br>
+        これを集計するために、隣の列に「何時台か」を取り出します。</p>
+        <ol>
+            <li>J列（空いている列）の先頭に「時間」と入力。</li>
+            <li>その下のセル（J2）に <code>=HOUR(B2)</code> と入力。<br>
+                <span class="note">※B列が時刻の場合。これで「10」や「17」という数字だけが取り出せます。</span></li>
+            <li>下までオートフィル（コピー）します。</li>
+        </ol>
+
+        <h3>STEP 2: ピボットテーブルでクロス集計</h3>
+        <p>「時間」と「売上金額」の関係を表にします。</p>
+        <ol>
+            <li>表全体を選択し、「挿入」タブ → 「ピボットテーブル」をクリック。</li>
+            <li><strong>行：</strong>「時間」<br>
+                <strong>値：</strong>「合計金額」（合計）</li>
+        </ol>
+
+        <h3>STEP 3: ヒートマップで可視化</h3>
+        <p>数字だけでは直感的に分かりにくいため、色をつけます。</p>
+        <ol>
+            <li>集計された数値の範囲を選択。</li>
+            <li>「ホーム」タブ → 「条件付き書式」 → 「カラースケール」 → 「赤・白・青」などを選択。</li>
+        </ol>
+
+        <div class="insight-box">
+            <span class="insight-title">💡 分析結果（インサイト）</span>
+            実際に <code>all_log.csv</code> を分析すると、以下の事実が判明しました。
+            <ul>
+                <li><strong>17時台が最大のピーク</strong>（売上が急増）。</li>
+                <li>逆に14時〜15時は中だるみする傾向がある。</li>
+            </ul>
+            ➡ <strong>アクション：</strong> 「17時に人員を最大化し、休憩は15時に回す」
+        </div>
+    </section>
+
+    <section>
+        <h2>第2章：【概念】SQLで「太客」を探す</h2>
+        <p>
+            データが100万行を超えたり、より複雑な条件でデータを抽出したい場合は、データベース言語「SQL」の出番です。<br>
+            ここでは、「どんな思考でデータを抜くか」のイメージを掴んでください。
+        </p>
+        <p class="note">※SQLの実行環境構築については、Webで「SQLite 導入」「DB Browser for SQLite」などを検索してください。</p>
+
+        <h3>例：客単価が高い「優良顧客」リストを作る</h3>
+        <p>「合計金額が1,500円以上の取引」だけを抜き出し、支払額の大きい順に並べる命令文です。</p>
+
+<pre><code>SELECT 
+    決済番号, 
+    時刻, 
+    客層, 
+    合計金額 
+FROM 
+    all_log 
+WHERE 
+    合計金額 >= 1500 
+ORDER BY 
+    合計金額 DESC;</code></pre>
+
+        <p><strong>解説：</strong></p>
+        <ul>
+            <li><code>SELECT</code>：欲しい列を選ぶ（「誰が」「いくら払ったか」）</li>
+            <li><code>FROM</code>：データ元を選ぶ（all_logテーブル）</li>
+            <li><code>WHERE</code>：条件で絞り込む（1500円以上）</li>
+            <li><code>ORDER BY</code>：並べ替える（高い順＝DESC）</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>第3章：【発展】Pythonで「相関」を読む</h2>
+        <p>
+            Excelでは難しい<strong>「商品Aと商品Bの同時購入（相関関係）」</strong>を分析します。<br>
+            「ポスカ（ポストカード）」の種類が多すぎて「どれとどれをセットにすべきか」悩んだ時、Pythonなら一瞬で答えを出せます。
+        </p>
+        <p class="note">※Python環境（AnacondaやVS Codeなど）の構築は、「Python インストール」で検索してください。<br>
+        以下のコードは、必要なライブラリ（pandas, matplotlib等）がインストール済みであることを前提としています。</p>
+
+        <h3>実装コード：商品間の相関行列ヒートマップ</h3>
+        <p>このスクリプトを実行すると、全部の商品ペアについて「一緒に買われる確率」を計算します。</p>
+
+<pre><code>import pandas as pd
+
+# 1. データの読み込み
+# ※Shift-JIS等の文字コードエラーが出る場合は encoding='cp932' を指定
+df = pd.read_csv('all_log.csv')
+
+# 2. 分析対象のカラム（商品列）を指定
+# ワッフルからポスカ、写真撮影までの列名を取得
+item_columns = df.columns[7:33] 
+
+# 3. 相関係数の算出
+# corr()関数一発で、全ての組み合わせの相関(-1.0 〜 1.0)を計算します
+correlation_matrix = df[item_columns].corr()
+
+# 4. 強い相関（0.4以上）があるペアだけを表示
+# 重複を除いてリストアップする処理
+print("--- 同時購入されやすい商品ペア BEST 5 ---")
+corr_pairs = correlation_matrix.unstack().sort_values(ascending=False)
+# 自分自身との相関(1.0)を除外
+corr_pairs = corr_pairs[corr_pairs < 1.0]
+print(corr_pairs.head(10))
+</code></pre>
+
+        <h3>実行結果と分析</h3>
+        <div style="background-color: #333; color: #fff; padding: 15px; border-radius: 5px; font-family: monospace;">
+            --- 同時購入されやすい商品ペア BEST 5 ---<br>
+            ポスカ (ノンディレクショナルレーザー) & ポスカ (サテライトイリュージョン) : <strong>0.865</strong><br>
+            ポスカ (フラン) & ポスカ (ノンディレクショナルレーザー) : <strong>0.576</strong><br>
+            アクキー (もこてる) & ポスカ (ノンディレクショナルレーザー) : <strong>0.518</strong><br>
+            ...
+        </div>
+
+        <div class="insight-box">
+            <span class="insight-title">💡 分析結果（インサイト）</span>
+            <ul>
+                <li><strong>「ノンディレクショナルレーザー」と「サテライトイリュージョン」の相関が0.86と極めて高い。</strong><br>
+                → この2枚はほぼ確実にセットで買われています。</li>
+                <li>「フラン」関連の商品もセット購入される傾向があります。</li>
+            </ul>
+            ➡ <strong>アクション：</strong> 「これらを最初から袋詰めした『弾幕セット』を作り、レジ回転率を上げる」
+        </div>
+    </section>
+
+    <section>
+        <h2>まとめ</h2>
+        <p>
+            分析は「数字を出して終わり」ではありません。<br>
+            <strong>「17時が忙しい」→「シフトを変えよう」</strong><br>
+            <strong>「この2つは一緒に売れる」→「セットを作ろう」</strong><br>
+            このように、次の行動（アクション）を決めるためにデータを使ってください。<br>
+            <br>
+            皆さんの代の成功を祈っています。
+        </p>
+    </section>
+
+</div>
+
+</body>
+</html>
