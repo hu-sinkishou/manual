@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>members.csv 作成・編集マニュアル</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root { 
+      --color-blue-cornflower: #6798ff; 
+      --color-page-ink: #0a0a0a; 
+      --color-card-carbon: #1e1e1e; 
+      --color-deep-coal: #141414; 
+      --color-onyx: #000000; 
+      --color-steel-border: #313131; 
+      --color-graphite: #454545; 
+      --color-ash: #a7a7a7; 
+      --color-snow: #ffffff; 
+      --font-inter: 'Inter', sans-serif; 
+      --font-jetbrains-mono: 'JetBrains Mono', monospace; 
+    }
+    body { background: var(--color-page-ink); color: var(--color-snow); font-family: var(--font-inter); line-height: 1.5; margin: 0; }
+    body::before { content:''; position:fixed; inset:0; background: linear-gradient(to right, var(--color-card-carbon) 1px, transparent 1px), linear-gradient(to bottom, var(--color-card-carbon) 1px, transparent 1px); background-size: 48px 48px; z-index:-1; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 64px 32px; }
+    .eyebrow { font-family: var(--font-jetbrains-mono); font-size: 12px; color: var(--color-ash); letter-spacing: 0.85px; margin-bottom: 24px; display: block; text-transform: uppercase; }
+    h1 { font-size: 56px; font-weight: 600; line-height: 1.14; letter-spacing: -2.02px; margin: 0 0 24px 0; }
+    h2 { font-size: 40px; font-weight: 600; line-height: 1.2; letter-spacing: -0.84px; margin: 0 0 40px 0; }
+    h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.5px; margin: 0 0 16px 0; }
+    p { color: var(--color-snow); font-size: 16px; margin-bottom: 16px; }
+    .card { background: var(--color-card-carbon); border: 1px solid var(--color-steel-border); border-radius: 8px; padding: 32px; margin-bottom: 24px; }
+    code { font-family: var(--font-jetbrains-mono); font-size: 14px; background: var(--color-deep-coal); color: var(--color-snow); padding: 2px 4px; border-radius: 4px; }
+    pre { background: var(--color-deep-coal); border: 1px solid var(--color-steel-border); border-radius: 8px; padding: 24px; overflow-x: auto; font-family: var(--font-jetbrains-mono); font-size: 14px; color: var(--color-snow); margin-bottom: 24px; }
+    .btn { display: inline-block; padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1px solid var(--color-graphite); color: var(--color-snow); margin-bottom: 48px; }
+    .list-item { margin-bottom: 12px; font-size: 16px; color: var(--color-snow); }
+    .list-item strong { font-weight: 500; color: var(--color-blue-cornflower); }
+    ul, ol { color: var(--color-snow); padding-left: 24px; margin-bottom: 24px; }
+    li { margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="shift_v2_manual_2026.html" class="btn">← 全体マニュアルへ戻る</a>
+    <header style="margin-bottom: 96px;">
+      <span class="eyebrow">DATA SOURCE</span>
+      <h1>members.csv 編集マニュアル</h1>
+      <p style="font-size: 20px; max-width: 720px;">シフト自動作成の元データとなるスタッフ情報ファイル（<code>members.csv</code>）の仕様と、VSCode等を用いた入力・編集時の注意点を解説します。</p>
+    </header>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">OVERVIEW</span>
+      <h2>1. 概要と基本ルール</h2>
+      <div class="card">
+        <p class="list-item"><strong>役割:</strong> スタッフの名前、担当可能な役職、責任者の可否、各時間帯のシフト希望を集約するファイルです。</p>
+        <p class="list-item"><strong>ファイル名と保存場所:</strong> 必ず <code>members.csv</code> という名前で、<code>config</code> フォルダ内に配置してください。</p>
+        <p class="list-item"><strong>エンコーディング:</strong> UTF-8形式で保存してください。</p>
+        <p class="list-item"><strong>基本ツール:</strong> 本手順は <strong>Visual Studio Code (VSCode)</strong> 等のテキストエディタでの編集を前提としています。</p>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">HEADERS</span>
+      <h2>2. CSVの列（ヘッダー）定義</h2>
+      <p>CSVの1行目（ヘッダー行）は、以下の必須項目を含んでいる必要があります。<br>※システムは名前で列を判定するため、必須項目が存在していれば「メールアドレス」などの不要な列が含まれていても無視され正常に動作します。</p>
+      
+      <div class="card">
+        <h3>必須となる列</h3>
+        <ul>
+          <li><strong>お名前:</strong> スタッフの氏名</li>
+          <li><strong>役職:</strong> 担当可能な役職</li>
+          <li><strong>責任者:</strong> 責任者として担当可能な役職（該当なしの場合は空白）</li>
+          <li><strong>時間枠:</strong> <code>config.json</code> の <code>time_slots</code> の <code>label</code>（例：<code>10:00</code>）と完全に一致する列名</li>
+          <li><strong>その他:</strong> （任意）備考やコメント。出力Excelに転記されます。</li>
+        </ul>
+        
+        <h3>VSCodeでの見え方の例</h3>
+        <p>カンマ（<code>,</code>）で区切られた以下のような1行になります。</p>
+        <pre>お名前,メールアドレス,役職,責任者,10:00,11:00,その他</pre>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">RULES</span>
+      <h2>3. 各項目の入力規則</h2>
+      
+      <div class="card">
+        <h3>お名前</h3>
+        <p>空白不可です。必ず入力してください。</p>
+        
+        <h3 style="margin-top: 32px;">役職・責任者</h3>
+        <p><code>config.json</code> の <code>roles</code> で定義した <code>"name"</code>（例：「レジ」「宣伝」）と完全に一致する文字を入力してください。</p>
+        <ul>
+          <li><strong>複数入力する場合:</strong> 複数の役職を担当できる場合は、<strong>必ず半角カンマ（<code>,</code>）のみ</strong>で区切ってください。</li>
+          <li>【正しい例】 <code>"レジ,宣伝"</code> （※CSVの列としてズレないよう <code>"</code> で囲む必要があります）</li>
+          <li>【誤った例】 <code>レジ、宣伝</code> （※読点はエラーになります）</li>
+        </ul>
+
+        <h3 style="margin-top: 32px;">時間帯（シフト希望）</h3>
+        <p><code>config.json</code> の <code>keywords</code> で定義された文字列のみ入力可能です。</p>
+        <ul>
+          <li><strong>可能:</strong> <code>〇</code>, <code>OK</code>, <code>可能</code> など</li>
+          <li><strong>緊急:</strong> <code>△</code>, <code>緊急</code>, <code>いざとなれば</code> など</li>
+          <li><strong>不可:</strong> <code>×</code>, <code>不可</code>, <code>-</code>, 空白 など</li>
+        </ul>
+
+        <h3 style="margin-top: 32px;">📝 「その他」列への特殊記号の入力について</h3>
+        <p>文章内に半角カンマ（<code>,</code>）を使うと列が区切られたと誤認されデータがズレます。文章内にカンマを含めたい場合は、<strong>文章全体を半角のダブルクォーテーション（<code>"</code>）で囲ってください。</strong></p>
+        <ul>
+          <li>【正しい例】 <code>"15時以降ならレジも可能です, よろしくお願いします"</code></li>
+          <li>【誤った例】 <code>15時以降ならレジも可能です, よろしくお願いします</code></li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">WORKAROUND</span>
+      <h2>4. Microsoft Forms の回答を利用する場合の注意点</h2>
+      <div class="card">
+        <p>Forms の出力CSVを利用する場合、複数選択項目の区切り文字が <strong>セミコロン（<code>;</code>）</strong> で出力されます。システムはカンマ区切りを要求しますが、単純な一括置換では列がズレるため、以下の手作業による修正を行ってください。</p>
+        
+        <ul>
+          <li><strong>【修正前（Forms出力）】</strong> <code>お名前,レジ;原作コーナー,10:00</code></li>
+          <li><strong>【修正後（正しい形式）】</strong> <code>お名前,"レジ,原作コーナー",10:00</code></li>
+        </ul>
+
+        <h3 style="margin-top: 32px;">修正手順（手作業）</h3>
+        <ol>
+          <li><code>members.csv</code> をVSCodeで開きます。</li>
+          <li>検索パネルを開き（ショートカット：<code>Ctrl + F</code>）、<code>;</code> （半角セミコロン）を検索します。</li>
+          <li>セミコロンが使われている箇所を見つけたら、その <code>;</code> を <code>,</code> （半角カンマ）に書き換えます。</li>
+          <li>さらに、その役職のまとまり全体を <code>"</code> （半角ダブルクォーテーション）で囲みます。</li>
+          <li>すべての該当箇所を修正するまで繰り返し、完了したら保存します。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">TROUBLESHOOTING</span>
+      <h2>5. よくあるエラーとチェックポイント</h2>
+      <div class="card">
+        <h3 style="margin-top: 0;">不要な空白の混入</h3>
+        <p><code>レジ</code> のように、役職名の前後にスペース（全角・半角）が入っているとエラーになります。</p>
+        
+        <h3 style="margin-top: 32px;">ヘッダー名の不一致</h3>
+        <p>CSVの時間列名（例：<code>10:00</code>）と <code>config.json</code> の <code>label</code> が一言一句一致しているか確認してください。</p>
+
+        <h3 style="margin-top: 32px;">ダブルクォーテーションの閉じ忘れ</h3>
+        <p><code>"</code> で囲む場合は、必ず文の最初と最後に配置してください。</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

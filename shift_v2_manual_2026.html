@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シフト自動作成システム v2 利用マニュアル</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-blue-cornflower: #6798ff;
+      --color-page-ink: #0a0a0a;
+      --color-card-carbon: #1e1e1e;
+      --color-deep-coal: #141414;
+      --color-onyx: #000000;
+      --color-steel-border: #313131;
+      --color-graphite: #454545;
+      --color-ash: #a7a7a7;
+      --color-snow: #ffffff;
+      --font-inter: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-jetbrains-mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    body { background: var(--color-page-ink); color: var(--color-snow); font-family: var(--font-inter); line-height: 1.5; margin: 0; }
+    body::before { content:''; position:fixed; inset:0; background: linear-gradient(to right, var(--color-card-carbon) 1px, transparent 1px), linear-gradient(to bottom, var(--color-card-carbon) 1px, transparent 1px); background-size: 48px 48px; z-index:-1; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 64px 32px; }
+    .eyebrow { font-family: var(--font-jetbrains-mono); font-size: 12px; color: var(--color-ash); letter-spacing: 0.85px; margin-bottom: 24px; display: block; text-transform: uppercase; }
+    h1 { font-size: 56px; font-weight: 600; line-height: 1.14; letter-spacing: -2.02px; margin: 0 0 24px 0; }
+    h2 { font-size: 40px; font-weight: 600; line-height: 1.2; letter-spacing: -0.84px; margin: 0 0 40px 0; }
+    h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.5px; margin: 0 0 16px 0; }
+    p { color: var(--color-snow); font-size: 16px; margin-bottom: 16px; }
+    .card { background: var(--color-card-carbon); border: 1px solid var(--color-steel-border); border-radius: 8px; padding: 32px; margin-bottom: 24px; }
+    code { font-family: var(--font-jetbrains-mono); font-size: 14px; background: var(--color-deep-coal); color: var(--color-snow); padding: 2px 4px; border-radius: 4px; }
+    pre { background: var(--color-deep-coal); border: 1px solid var(--color-steel-border); border-radius: 8px; padding: 24px; overflow-x: auto; font-family: var(--font-jetbrains-mono); font-size: 14px; color: var(--color-snow); margin-bottom: 24px; }
+    .btn-group { display: flex; gap: 16px; margin-top: 24px; }
+    .btn { display: inline-block; padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; text-decoration: none; border: none; cursor: pointer; }
+    .btn-secondary { background: transparent; border: 1px solid var(--color-graphite); color: var(--color-snow); }
+    ul, ol { color: var(--color-snow); padding-left: 24px; margin-bottom: 24px; }
+    li { margin-bottom: 8px; }
+    strong { color: var(--color-blue-cornflower); font-weight: 500; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header style="margin-bottom: 96px;">
+      <span class="eyebrow">SYSTEM MANUAL</span>
+      <h1>シフト自動作成システム v2</h1>
+      <p style="font-size: 20px; max-width: 720px;">スタッフの希望と店舗の要件をすり合わせ、最適なシフト表をExcel形式で自動生成するツールです。</p>
+      <div class="btn-group">
+        <a href="shift_config_manual_2026.html" class="btn btn-secondary">config.json 設定マニュアルを開く</a>
+        <a href="shift_csv_manual_2026.html" class="btn btn-secondary">members.csv 編集マニュアルを開く</a>
+      </div>
+    </header>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">FEATURES</span>
+      <h2>1. できること</h2>
+      <div class="card">
+        <h3>最適なシフト割り当て</h3>
+        <p>スタッフの勤務可能時間や担当可能役職を考慮し、各時間帯の必要人数を満たすシフトを自動計算します。</p>
+        
+        <h3 style="margin-top: 32px;">複雑なルールの自動適用</h3>
+        <ul>
+          <li><strong>絶対ルール:</strong> 1人1枠1役職まで、営業時間内の割り当て、責任者の確保、連続勤務時間・最小休憩時間などのルールを厳守します。</li>
+          <li><strong>優先ルール:</strong> 不足人数の最小化、希望役職の優先、連続勤務の推奨を考慮します。</li>
+          <li><strong>緊急枠の回避:</strong> 「いざとなれば可能（緊急）」と申告したスタッフの割り当てを極力避けます。</li>
+        </ul>
+
+        <h3 style="margin-top: 32px;">見やすいExcel出力</h3>
+        <p>役職ごとに色分けされ、労働時間などの統計情報を含んだシフト表（<code>.xlsx</code>）を自動生成します。</p>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">PREPARATION</span>
+      <h2>2. 実行前準備</h2>
+      <p>実行前に、シフト作成の基準となるデータを準備する必要があります。</p>
+      <div class="card">
+        <h3>1. スタッフ情報の入力 (<code>config/members.csv</code>)</h3>
+        <ul>
+          <li>スタッフの「お名前」「役職」「責任者（担当可能な場合）」を入力します。</li>
+          <li>各時間帯の出勤可否を入力します。
+            <ul>
+              <li><code>〇</code>, <code>OK</code>, <code>可能</code>: 出勤可能</li>
+              <li><code>△</code>, <code>緊急</code>, <code>いざとなれば</code>: 緊急時のみ可能</li>
+              <li><code>×</code>, <code>不可</code>, <code>-</code>, 空白: 出勤不可</li>
+            </ul>
+          </li>
+          <li>※役職が複数ある場合はカンマ（<code>,</code>）または読点（<code>、</code>）で区切ってください。</li>
+        </ul>
+        
+        <h3 style="margin-top: 32px;">2. ルールの確認・変更 (<code>config/config.json</code>)</h3>
+        <p>通常は変更不要ですが、時間ごとの「必要人数（<code>requirements</code>）」や「最大連続勤務時間」を変更したい場合はこのファイルをテキストエディタで編集します。</p>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">STRUCTURE</span>
+      <h2>3. フォルダの構成とファイルの説明</h2>
+      <p>本システムは、実行ファイルと設定フォルダが同じ場所にあることを前提に動作します。</p>
+      
+      <div class="card">
+        <h3>最少構成（実行前に必要なもの）</h3>
+        <pre>
+実行ディレクトリ/
+  ├── shift_scheduler.exe  ... 実行ファイル本体。これをダブルクリックして起動します。
+  └── config/              ... 設定ファイルを配置するフォルダ（必須）
+       ├── config.json     ... 必要人数、役職の色、システムの制約ルールを定義するファイル。
+       └── members.csv     ... スタッフの名前、担当役職、シフト希望を入力するファイル。</pre>
+
+        <h3 style="margin-top: 32px;">実行時に自動作成されるもの</h3>
+        <pre>
+実行ディレクトリ/
+  ├── output/              ... シフト表が出力されるフォルダ。
+  │    └── shift_result.xlsx ... 完成したシフト表（Excelファイル）。
+  └── logs/                ... 動作記録が保存されるフォルダ。
+       └── app.log         ... エラーが起きた際の原因究明に使う詳細なログファイル。</pre>
+      </div>
+    </section>
+
+    <section style="margin-bottom: 96px;">
+      <span class="eyebrow">EXECUTION</span>
+      <h2>4. 実行手順</h2>
+      <div class="card">
+        <ol>
+          <li><code>config/members.csv</code> に今回のシフト希望が正しく入力されていることを確認し、ファイルを保存して閉じます。<br>※Excelで開いたまま実行するとエラーになる場合があります。</li>
+          <li><code>shift_scheduler.exe</code> をダブルクリックして実行します。</li>
+          <li>黒い画面（コマンドプロンプト）が立ち上がり、計算が始まります。</li>
+          <li>「✅ シフト作成成功！」と表示されたら完了です。<code>output</code>フォルダ内の<code>shift_result.xlsx</code>を確認してください。</li>
+          <li>画面の指示に従い、Enterキーを押して画面を閉じます。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section>
+      <span class="eyebrow">TROUBLESHOOTING</span>
+      <h2>5. 基本的なエラーの対処方法</h2>
+      <p>エラーが発生した場合は、画面または <code>logs/app.log</code> のメッセージを確認して対応してください。</p>
+      
+      <div class="card">
+        <h3 style="margin-top: 0;">Q. 「データ不整合が検出されました」と表示されて停止する</h3>
+        <ul>
+          <li><strong>原因:</strong> <code>members.csv</code> の入力形式に問題があります。</li>
+          <li><strong>対処:</strong> エラーメッセージに従い、CSVを修正してください。
+            <ul>
+              <li>例:「役職列に不要な空白が含まれています」 → 役職名の前後のスペースを削除。</li>
+              <li>例:「許可されたキーワードに含まれていません」 → 〇や×の代わりの打ち間違いがないか確認。</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3 style="margin-top: 32px;">Q. 「〇〇は責任者が必須の役職ですが、担当できる人が0人です」</h3>
+        <ul>
+          <li><strong>原因:</strong> 責任者が必要な役職に対して、誰も「責任者」列にその役職名を持っていません。</li>
+          <li><strong>対処:</strong> <code>members.csv</code> の「責任者」列に、該当する役職を担当できる人を最低1名追加してください。</li>
+        </ul>
+
+        <h3 style="margin-top: 32px;">Q. 「シフト作成失敗」「条件が厳しすぎるか、人数が不足しています」</h3>
+        <ul>
+          <li><strong>原因:</strong> 出勤可能な人数に対して要求している必要人数が多すぎるか、担当できる役職に偏りがあり、シフトが組めない状態です。</li>
+          <li><strong>対処:</strong> 画面上に「不足分析レポート」が表示されるので、どの時間帯のどの役職が足りないか確認します。<code>members.csv</code> を調整して出勤可能人数を増やすか、<code>config.json</code> の必要人数を減らして再度実行してください。</li>
+        </ul>
+
+        <h3 style="margin-top: 32px;">Q. Excel出力時にエラーが発生する</h3>
+        <ul>
+          <li><strong>原因:</strong> 前回出力された <code>shift_result.xlsx</code> をExcelで開いたままプログラムを実行しようとしています。</li>
+          <li><strong>対処:</strong> 開いているExcelファイルを閉じてから、再度実行してください。</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
